@@ -1,4 +1,4 @@
-# single page application
+# Single Page Applications
 
 ## lezioni
 

@@ -1,4 +1,4 @@
-- [vai al file principale](../../Readme.md)
+ [vai al file principale](../../Readme.md)
 
 
 # 1 lezione 22 Settembre 2025
