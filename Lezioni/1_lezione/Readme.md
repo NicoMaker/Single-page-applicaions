@@ -5,4 +5,4 @@
 
 ## Esercizi
 
-- [1 esercizio](Esercizi/1_esercizio)
+- [1 esercizio](Esercizi/1_Esercizio)
