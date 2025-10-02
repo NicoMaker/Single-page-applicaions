@@ -1,16 +1,21 @@
-import './App.css'
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const ciccio = "prova";
+  const [count, setCount] = useState(42); // stato con valore iniziale 42
 
-  const Ciccio = "Prova";
+  const clickHandler = () => 
+    setCount(count + 1); // aggiorna lo stato
 
   return (
-  <>
-    <h1>{Ciccio}</h1>
-    <h2>Ciao a tutti</h2>
-    <p>{15+18}</p>
-  </>
-  )
+    <>
+      <button onClick={clickHandler}>Click me</button>
+      <h1>{15 + 18}</h1>
+      <p>{ciccio}</p>
+      <p>{count}</p>
+    </>
+  );
 }
 
-export default App
+export default App;
