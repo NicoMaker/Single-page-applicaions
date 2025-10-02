@@ -2,18 +2,19 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const ciccio = "prova";
-  const [count, setCount] = useState(42); // stato con valore iniziale 42
+  const [count, setCount]= useState(42);
+  
 
-  const clickHandler = () => 
-    setCount(count + 1); // aggiorna lo stato
+  function clickHandler () {
+   setCount(x => x - 1);
+  }
+  const h1style = {
+     color: "blue" };
 
   return (
     <>
       <button onClick={clickHandler}>Click me</button>
-      <h1>{15 + 18}</h1>
-      <p>{ciccio}</p>
-      <p>{count}</p>
+      <h1 className= {count % 2 === 0 ? "pippo" : "pluto"}>{count}</h1>
     </>
   );
 }
