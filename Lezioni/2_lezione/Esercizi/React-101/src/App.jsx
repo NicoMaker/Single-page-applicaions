@@ -1,22 +1,22 @@
-import "./App.css";
 import { useState } from "react";
+import DecreaseCounter from "./DecreaseCounter";
+import IncreaseCounter from "./IncreaseCounter";
+import './App.css';
 
 function App() {
-  const [count, setCount]= useState(42);
-  
+  const [value, setValue] = useState(0);
 
-  function clickHandler () {
-   setCount(x => x - 1);
-  }
-  const h1style = {
-     color: "blue" };
+  const numberColorClass = value < 0 ? 'negative' : 'positive';
 
   return (
-    <>
-      <button onClick={clickHandler}>Click me</button>
-      <h1 className= {count % 2 === 0 ? "pippo" : "pluto"}>{count}</h1>
-      <h2 className="ciccio"> Ciao</h2>
-    </>
+    <div className="app-container">
+      <h1 className="title">Modern Counter</h1>
+      <h2 className={`number ${numberColorClass}`}>{value}</h2>
+      <div className="buttons">
+        <DecreaseCounter setValue={setValue} />
+        <IncreaseCounter setValue={setValue} />
+      </div>
+    </div>
   );
 }
 
