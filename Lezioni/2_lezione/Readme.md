@@ -4,7 +4,7 @@
 
 ## Esercizi
 
-- [React-101](Esercizi/React-101)
+- [Counter](Esercizi/Counter)
 - [TodoList](Esercizi/TodoList)
 - [Basic](Esercizi/Basic)
 - [TodoList_manage](Esercizi/TodoList_manage)
