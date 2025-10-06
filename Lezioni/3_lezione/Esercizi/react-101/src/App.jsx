@@ -1,7 +1,8 @@
 import style from './App.module.css';
 import { useState } from 'react';
 import {produce} from 'immer';
-import MyButton from './components/MyButton';
+import clsx from 'clsx';
+import { MyButton } from './components/MyButton';
 
 
 const initialState = [
@@ -27,11 +28,11 @@ function App() {
     setTodos(todos.filter(t => t.id !== td.id));
 
 
-    const index = todos.findIndex(t => t.id === td.id);
+    // const index = todos.findIndex(t => t.id === td.id);
 
-    setTodos(produce(todos, draft => {
-      draft.splice(index, 1);
-    }));
+    // setTodos(produce(todos, draft => {
+    //   draft.splice(index, 1);
+    // }));
   }
 
   function toggleTodo(td) {
@@ -51,18 +52,27 @@ function App() {
   //   return res;
   // }
 
-  function todoStyle(td) {
-    return ['todo', td.done ? 'done' : null].filter(x => !!x).join(' ');
-  }
+  // function todoStyle(td) {
+  //   // return clsx(['todo', td.done && 'done']);
+  //   // return clsx({'todo': true, 'done': td.done});
+  //   return ;
+  //   // return ['todo', td.done ? 'done' : null].filter(x => !!x).join(' ');
+  // }
 
   return (
     <>
-    <button onClick={tmp}>ciao</button>
       <ul>
         {todos.map(t => <li key={t.id}>
-            <span className={todoStyle(t)}>{t.text}</span>
-            <button onClick={() => deleteTodo(t)}>delete</button>
-            <button onClick={() => toggleTodo(t)}>{t.done ? 'undone' : 'done'}</button>
+            <span className={clsx('todo', {'done': t.done})}>{t.text}</span>
+            <MyButton 
+              level={4} 
+              icon="fa-trash" 
+              clickHandler={() => deleteTodo(t)} 
+            />
+            <MyButton 
+              icon={ t.done ? 'fa-times' : 'fa-check'} 
+              clickHandler={() => toggleTodo(t)} 
+            />
           </li>)}
       </ul>
     </>
