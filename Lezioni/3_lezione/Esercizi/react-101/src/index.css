@@ -28,3 +28,11 @@
 .ciccio {
   background-color: purple;
 }
+
+.todo {
+  color: crimson;
+}
+
+.done {
+  text-decoration: line-through;
+}

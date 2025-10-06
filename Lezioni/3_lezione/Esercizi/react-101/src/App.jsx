@@ -1,5 +1,6 @@
 import style from './App.module.css';
 import { useState } from 'react';
+import {produce} from 'immer';
 
 
 const initialState = [
@@ -15,17 +16,53 @@ function App() {
   // console.log('todos', todos);
 
   function tmp() {
-    const a1 = [1, 2, 3];
-    const a2 = a1.map(x => x * 5);
-    console.log(a2);
+    setTodos(produce(todos, draft => {
+      draft.pop();
+    }));
   }
 
+  function deleteTodo(td) {
+    
+    setTodos(todos.filter(t => t.id !== td.id));
+
+
+    const index = todos.findIndex(t => t.id === td.id);
+
+    setTodos(produce(todos, draft => {
+      draft.splice(index, 1);
+    }));
+  }
+
+  function toggleTodo(td) {
+    const index = todos.findIndex(t => t.id === td.id);
+
+    setTodos(produce(todos, draft => {
+      draft[index].done = !draft[index].done;
+    }));
+  }
+
+  // function todoStyle(td) {
+  //   let res = 'todo';
+  //   if(td.done) {
+  //     res += ' done';
+  //   }
+
+  //   return res;
+  // }
+
+  function todoStyle(td) {
+    return ['todo', td.done ? 'done' : null].filter(x => !!x).join(' ');
+  }
 
   return (
     <>
     <button onClick={tmp}>ciao</button>
       <ul>
-        {todos.map(t => <li key={t.id}>{t.text}</li>)}
+        {todos.map(t => <li key={t.id}>
+            <span className={todoStyle(t)}>{t.text}</span>
+            <button onClick={() => deleteTodo(t)}>delete</button>
+            <button onClick={() => toggleTodo(t)}>{t.done ? 'undone' : 'done'}</button>
+          </li>)}
       </ul>
     </>
   )
