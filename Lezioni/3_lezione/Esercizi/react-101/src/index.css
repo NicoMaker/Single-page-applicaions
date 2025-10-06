@@ -1,0 +1,30 @@
+
+
+#root > h1 {
+  background-color: red;
+}
+
+
+.pippo {
+  color: green;
+  font-weight: bold;
+}
+
+.pluto {
+  color: pink;
+  font-weight: bold;
+}
+
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+
+.ciccio {
+  background-color: purple;
+}
