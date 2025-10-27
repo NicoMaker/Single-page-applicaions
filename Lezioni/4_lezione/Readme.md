@@ -4,3 +4,5 @@
 
 ## Esercizi
 
+- [react-101](Esercizi/react-101)
+- [TodoList](Esercizi/TodoList)
