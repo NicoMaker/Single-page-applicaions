@@ -6,3 +6,4 @@
 
 - [react-101](Esercizi/react-101)
 - [TodoList](Esercizi/TodoList)
+- [ToDOListEasy](Esercizi/ToDoList_Easy)
