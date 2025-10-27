@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {produce} from 'immer';
 import clsx from 'clsx';
 
-import { TodoListItem } from './components/TodoListItem';
+import { ToDoList } from './components/ToDoList';
 
 
 const initialState = [
@@ -28,16 +28,27 @@ function App() {
     }));
   }
 
+  function editTodo(td) {
+    const newText = prompt('Modifica attività:', td.text);
+    if (newText !== null && newText.trim() !== '') { // Controlla che l'utente non abbia annullato o inserito testo vuoto
+      setTodos(produce(todos, draft => {
+        const index = draft.findIndex(t => t.id === td.id);
+        if (index !== -1) {
+          draft[index].text = newText.trim();
+        }
+      }));
+    }
+  }
+
   return (
     <>
-      <ul>
-        {todos.map(t => <TodoListItem 
-                          todo={t} 
-                          toggleTodo={() => toggleTodo(t)}
-                          deleteTodo={() => deleteTodo(t)}
-                          key={t.id} 
-                        />)}
-      </ul>
+      {/* Utilizza il componente ToDoList per renderizzare la lista */}
+      <ToDoList
+        todos={todos}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo} // Passa la nuova funzione editTodo
+      />
     </>
   )
 }
