@@ -1,28 +1,29 @@
 import clsx from 'clsx';
 import { MyButton } from './MyButton';
+import style from '../App.module.css';
 
 
-export const TodoListItem = ({todo, toggleTodo, deleteTodo}) => {
+export const TodoListItem = ({todo, toggleTodo, deleteTodo, editTodo}) => {
 
     return (
-        <li className={clsx('todo-item', { 'completed': todo.done })}>
-            <div 
-                className={clsx('todo-checkbox', { 'checked': todo.done })}
-                onClick={toggleTodo}
-            >
-            </div>
-            <span className="todo-text">{todo.text}</span>
-            <div className="todo-actions">
+        <li className={clsx(style['todo-item'], { [style.completed]: todo.done })}>
+            <span className={style['todo-text']} onClick={toggleTodo}>
+                {todo.text}
+            </span>
+            <div className={style['todo-actions']}>
                 <MyButton 
                     icon={ todo.done ? 'fa-times' : 'fa-check'} 
                     clickHandler={toggleTodo} 
-                    className="toggle-btn"
+                />
+                <MyButton 
+                    level={1}
+                    icon="fa-pencil" 
+                    clickHandler={editTodo} 
                 />
                 <MyButton 
                     level={4} 
                     icon="fa-trash" 
                     clickHandler={deleteTodo} 
-                    className="delete-btn"
                 />
             </div>
         </li>
