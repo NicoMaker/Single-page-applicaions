@@ -2,7 +2,8 @@ import style from './App.module.css';
 import { useState } from 'react';
 import {produce} from 'immer';
 import clsx from 'clsx';
-import { MyButton } from './components/MyButton';
+
+import { TodoListItem } from './components/TodoListItem';
 
 
 const initialState = [
@@ -15,24 +16,8 @@ const initialState = [
 function App() {
   const [todos, setTodos] = useState(initialState);
 
-  // console.log('todos', todos);
-
-  function tmp() {
-    setTodos(produce(todos, draft => {
-      draft.pop();
-    }));
-  }
-
   function deleteTodo(td) {
-    
     setTodos(todos.filter(t => t.id !== td.id));
-
-
-    // const index = todos.findIndex(t => t.id === td.id);
-
-    // setTodos(produce(todos, draft => {
-    //   draft.splice(index, 1);
-    // }));
   }
 
   function toggleTodo(td) {
@@ -43,37 +28,15 @@ function App() {
     }));
   }
 
-  // function todoStyle(td) {
-  //   let res = 'todo';
-  //   if(td.done) {
-  //     res += ' done';
-  //   }
-
-  //   return res;
-  // }
-
-  // function todoStyle(td) {
-  //   // return clsx(['todo', td.done && 'done']);
-  //   // return clsx({'todo': true, 'done': td.done});
-  //   return ;
-  //   // return ['todo', td.done ? 'done' : null].filter(x => !!x).join(' ');
-  // }
-
   return (
     <>
       <ul>
-        {todos.map(t => <li key={t.id}>
-            <span className={clsx('todo', {'done': t.done})}>{t.text}</span>
-            <MyButton 
-              level={4} 
-              icon="fa-trash" 
-              clickHandler={() => deleteTodo(t)} 
-            />
-            <MyButton 
-              icon={ t.done ? 'fa-times' : 'fa-check'} 
-              clickHandler={() => toggleTodo(t)} 
-            />
-          </li>)}
+        {todos.map(t => <TodoListItem 
+                          todo={t} 
+                          toggleTodo={() => toggleTodo(t)}
+                          deleteTodo={() => deleteTodo(t)}
+                          key={t.id} 
+                        />)}
       </ul>
     </>
   )
