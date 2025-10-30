@@ -1,5 +1,5 @@
 {
-  "name": "form001",
+  "name": "form-101",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
+    "clsx": "^2.1.1",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.65.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
