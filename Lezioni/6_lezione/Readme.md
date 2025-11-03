@@ -6,3 +6,4 @@
 
 - [form101](Esercizi/form101)
 - [Modern_Form](Esercizi/Modern_Form)
+- [RegistrazioneForm](Esercizi/RegistrazioneForm)
