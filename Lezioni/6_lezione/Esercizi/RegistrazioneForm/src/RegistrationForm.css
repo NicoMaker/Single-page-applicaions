@@ -1,4 +1,9 @@
 /* RegistrationForm.css */
+/* =====================================
+   MODER GLASSMORHISM RESPONSIVE
+   =====================================
+*/
+
 /* Reset e base */
 * {
   margin: 0;
@@ -6,15 +11,18 @@
   box-sizing: border-box;
 }
 
+/* Colori e Sfondo Principale */
 body {
-  font-family: 'Inter', sans-serif; /* Preferenza per font più moderno */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Inter', sans-serif;
+  /* Sfondo con gradiente vivace */
+  background: linear-gradient(135deg, #a770ef 0%, #cf8bf3 50%, #fbc7d4 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  color: #1e293b; /* Colore testo base */
+  /* Padding aumentato per dare spazio sui bordi */
+  padding: 40px 20px; 
+  color: #1f2937;
 }
 
 .registration-container {
@@ -24,24 +32,27 @@ body {
   width: 100%;
 }
 
-/* Container principale del form (Modern Glassmorphism/Sleek Design) */
+/* Container principale del form (Glassmorphism & Responsive) */
 .form-container {
-  max-width: 440px; /* Leggermente più stretto per eleganza */
+  /* Larghezza massima che è ampia sul desktop */
+  max-width: 580px; 
   width: 100%;
-  background: rgba(255, 255, 255, 0.9); /* Leggera trasparenza */
-  backdrop-filter: blur(20px); /* Aumento del blur per effetto vetro */
-  border-radius: 28px; /* Raggi più ampi */
-  padding: 40px;
-  /* Shadow moderna (soft-shadow) e bordo sottile */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  animation: slideIn 0.5s ease-out;
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Bordo sottile per l'effetto vetro */
+  /* Effetto Vetro Smerigliato */
+  background: rgba(255, 255, 255, 0.7); 
+  backdrop-filter: blur(25px); 
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 30px; 
+  padding: 50px; 
+  /* Shadow soft e bordo "vetroso" */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5); 
+  animation: slideIn 0.6s ease-out;
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -51,167 +62,148 @@ body {
 
 .form-container > div:first-child {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 35px;
 }
 
 .form-container h2 {
-  font-size: 2.2rem; /* Leggermente ridotto */
-  font-weight: 700;
-  /* Gradiente più vivace e moderno per il titolo */
-  background: linear-gradient(135deg, #4c51bf 0%, #7c3aed 100%); 
+  font-size: 2.5rem; 
+  font-weight: 800;
+  /* Gradiente principale e moderno per il titolo */
+  background: linear-gradient(45deg, #9333ea, #db2777); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .form-container > div:first-child p {
-  color: #64748b;
-  font-size: 1rem;
+  color: #6b7280;
+  font-size: 1.1rem;
 }
 
 .form-fields {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Spaziatura leggermente ridotta */
+  gap: 25px; 
 }
 
 /* Form groups */
-.form-group {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
 .form-group label {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: #374151;
   margin-bottom: 8px;
 }
 
-/* Input */
+/* Input (Pulito e Moderno) */
 .form-group input {
-  padding: 14px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px; /* Raggi più morbidi */
+  padding: 16px 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 15px;
   font-size: 1rem;
-  color: #1e293b;
-  background: #f8fafc;
+  color: #1f2937;
+  background: rgba(255, 255, 255, 0.8);
   transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-/* Placeholder */
-.form-group input::placeholder {
-  color: #94a3b8;
-  font-style: italic;
+  width: 100%; /* Assicura che l'input prenda tutto lo spazio disponibile */
 }
 
 /* Focus State Moderno (Focus Ring) */
 .form-group input:focus {
   outline: none;
-  border-color: #7c3aed; /* Colore primario del gradiente */
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2); /* Focus ring sottile */
+  border-color: #db2777; 
+  box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.2); 
+  background: white;
 }
 
 /* Error State */
 .form-group .input-error {
-  border-color: #ef4444; /* Rosso vivo per errore */
-  background: #fef2f2;
+  border-color: #ef4444; 
 }
 
 .form-group .input-error:focus {
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
     border-color: #ef4444;
 }
 
-/* Testi di Feedback (Errori e Successo) */
+/* Testi di Feedback */
 .error-text {
-  font-size: 0.85rem;
   color: #ef4444;
-  margin-top: 6px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.error-text span {
-    font-size: 0.9rem;
 }
 
 .success-text {
-  font-size: 0.85rem;
   color: #10b981;
-  margin-top: 6px;
+}
+
+.error-text, .success-text {
+  font-size: 0.9rem;
+  margin-top: 8px;
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 5px;
-}
-
-.success-text span {
-    font-size: 0.9rem;
 }
 
 /* Feedback Requisiti Password */
 .password-feedback {
-  margin-top: 12px;
-  padding: 12px;
-  background: #f1f5f9; /* Sfondo chiaro per la lista */
-  border-radius: 10px;
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .password-feedback .feedback-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #334155;
-  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 10px;
 }
 
 .password-feedback p {
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.8;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .password-feedback .met {
-  color: #10b981; /* Verde per requisito soddisfatto */
+  color: #10b981; 
 }
 
 .password-feedback .not-met {
-  color: #94a3b8; /* Grigio chiaro per requisito non soddisfatto */
+  color: #9ca3af; 
   text-decoration: line-through;
 }
 
 /* Submit Button */
 .submit-button {
   width: 100%;
-  padding: 14px 20px;
-  font-size: 1.1rem;
+  padding: 18px 20px;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #ffffff;
   border: none;
-  border-radius: 12px;
+  border-radius: 15px;
   cursor: pointer;
-  margin-top: 10px;
-  /* Gradiente principale e shadow elegante */
-  background: linear-gradient(90deg, #6d28d9 0%, #4c1d95 100%);
-  box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+  margin-top: 15px;
+  /* Gradiente moderno e vivace */
+  background: linear-gradient(90deg, #db2777 0%, #9333ea 100%);
+  box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
   transition: all 0.3s ease;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .submit-button:hover:enabled {
-  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.6);
+  background: linear-gradient(90deg, #9333ea 0%, #db2777 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(147, 51, 234, 0.4);
 }
 
 .submit-button:disabled {
-  background: #cbd5e1; /* Grigio tenue per stato disabilitato */
+  background: #e5e7eb; 
+  color: #9ca3af;
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
@@ -220,73 +212,71 @@ body {
 
 /* Messaggio di successo */
 .success-message-container {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  padding: 48px 40px;
-  max-width: 440px;
+  /* Vetro smerigliato */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 50px 40px;
+  max-width: 500px;
   width: 100%;
   text-align: center;
-  /* Animazione più giocosa e moderna */
-  animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+  animation: successPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
-@keyframes successPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(-5deg);
+/* Media Query per Schermi Più Piccoli (ad esempio, telefoni) */
+@media (max-width: 600px) {
+  /* Adatta il body */
+  body {
+    padding: 10px;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
+  
+  /* Riduci il padding del form sui piccoli schermi */
+  .form-container {
+    padding: 30px 25px;
+    border-radius: 20px; /* Raggi più piccoli */
   }
-}
 
-.success-emoji {
-  font-size: 4rem;
-  margin-bottom: 16px;
-  animation: bounce 0.8s ease-out;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
+  /* Riduci la dimensione del titolo */
+  .form-container h2 {
+    font-size: 2rem;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.success-message-container h2 {
-    font-size: 2.5rem;
-    background: linear-gradient(135deg, #4c51bf 0%, #7c3aed 100%); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
-}
-
-.success-message-container p {
-    color: #334155;
+  
+  /* Riduci la dimensione del bottone */
+  .submit-button {
+    padding: 14px 20px;
     font-size: 1.1rem;
-    margin-bottom: 24px;
-}
+    border-radius: 12px;
+  }
 
-.success-message-container p span {
-    font-weight: 700;
-    color: #4c51bf;
+  /* Riduci il padding del feedback password */
+  .password-feedback {
+    padding: 10px;
+  }
+  
+  /* Riduci la dimensione del successo */
+  .success-message-container {
+      padding: 40px 30px;
+  }
+  
+  .success-emoji {
+      font-size: 4rem;
+  }
+  
+  .success-message-container h2 {
+      font-size: 2.2rem;
+  }
 }
 
 .back-button {
   width: 100%;
-  padding: 12px 20px;
-  font-size: 1rem;
+  padding: 14px 20px;
+  font-size: 1.1rem;
   font-weight: 600;
-  color: #374151;
+  color: #4b5563; /* Colore testo grigio */
   border: 1px solid #d1d5db;
-  border-radius: 10px;
+  border-radius: 15px;
   cursor: pointer;
   background-color: #f3f4f6;
   transition: background-color 0.2s, transform 0.2s;
@@ -295,4 +285,153 @@ body {
 .back-button:hover {
   background-color: #e5e7eb;
   transform: translateY(-1px);
+}
+
+/* Stili per il pulsante "Nuova Registrazione" */
+.back-button {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.15rem; /* Leggermente più grande */
+  font-weight: 700;
+  color: #ffffff; /* Testo bianco */
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  
+  /* Gradiente coerente con il bottone di submit, ma leggermente diverso */
+  background: linear-gradient(90deg, #db2777 0%, #9333ea 100%);
+  box-shadow: 0 5px 15px rgba(219, 39, 119, 0.4); /* Ombra elegante */
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.back-button:hover {
+  /* Gradiente invertito o leggermente più chiaro al hover */
+  background: linear-gradient(90deg, #9333ea 0%, #db2777 100%);
+  transform: translateY(-2px); /* Effetto "sollevato" più marcato */
+  box-shadow: 0 8px 20px rgba(147, 51, 234, 0.5);
+}
+
+.back-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Messaggio di successo (Coerente con Glassmorphism) */
+.success-message-container {
+  /* Vetro smerigliato */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 60px 50px; /* Padding più generoso */
+  max-width: 550px; /* Larghezza più coerente con il form */
+  width: 100%;
+  text-align: center;
+  /* Animazione d'ingresso moderna */
+  animation: successPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+@keyframes successPop {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Emoji/Icona di successo */
+.success-emoji {
+  font-size: 6rem; /* Emoji più grande */
+  margin-bottom: 25px;
+  display: block;
+  /* Animazione per dare un tocco di gioia */
+  animation: bounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+
+.success-message-container h2 {
+    font-size: 3.2rem; /* Titolo più grande e impattante */
+    font-weight: 800;
+    /* Gradiente vibrante */
+    background: linear-gradient(45deg, #db2777, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.success-message-container p {
+    color: #4b5563;
+    font-size: 1.3rem; /* Testo più leggibile */
+    margin-bottom: 40px; /* Spazio prima del bottone */
+    font-weight: 500;
+}
+
+.success-message-container p span {
+    font-weight: 800;
+    color: #9333ea; /* Colore viola per il nome utente */
+}
+
+/* Bottone Nuova Registrazione (già aggiornato per coerenza) */
+.back-button {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  
+  background: linear-gradient(90deg, #db2777 0%, #9333ea 100%);
+  box-shadow: 0 5px 15px rgba(219, 39, 119, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.back-button:hover {
+  background: linear-gradient(90deg, #9333ea 0%, #db2777 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(147, 51, 234, 0.5);
+}
+
+.back-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Query per Schermi Più Piccoli */
+@media (max-width: 600px) {
+  /* ... (Stili precedenti per il responsive) ... */
+  .form-container {
+    padding: 30px 25px;
+    border-radius: 20px;
+  }
+  
+  /* Riduci la dimensione del successo sui piccoli schermi */
+  .success-message-container {
+      padding: 40px 30px;
+  }
+  
+  .success-emoji {
+      font-size: 4.5rem;
+  }
+  
+  .success-message-container h2 {
+      font-size: 2.5rem;
+  }
+
+  .success-message-container p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .submit-button, .back-button {
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+  }
 }
