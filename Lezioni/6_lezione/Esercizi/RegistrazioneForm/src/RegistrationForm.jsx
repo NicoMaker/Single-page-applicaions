@@ -134,25 +134,15 @@ function RegistrationForm() {
   const passwordCriteriaMet = Object.values(passwordRequirements).every(req => req);
   
   // ✅ CONTROLLO COMPLETO: tutti i campi validi per abilitare il bottone
-  const isFormValid = 
-    formData.username.trim() !== '' &&
-    formData.email !== '' &&
-    EMAIL_REGEX.test(formData.email) &&
-    passwordCriteriaMet &&
-    formData.confirmPassword !== '' &&
-    formData.password === formData.confirmPassword;
+  const isFormValid = formData.username.trim() !== '' && formData.email !== '' && EMAIL_REGEX.test(formData.email) && passwordCriteriaMet && formData.confirmPassword !== '' && formData.password === formData.confirmPassword;
 
   if (isSubmitted) {
     return (
       <div className="registration-container">
         <div className="success-message-container">
           <div className="success-emoji">🎉</div>
-          <h2>
-            Registrazione Completata!
-          </h2>
-          <p>
-            Benvenuto <span>{formData.username}</span>!
-          </p>
+          <h2> Registrazione Completata! </h2>
+          <p> Benvenuto <span>{formData.username}</span>! </p>
           <button onClick={handleNewRegistration} className="back-button">
             Nuova Registrazione
           </button>
@@ -165,14 +155,10 @@ function RegistrationForm() {
     <div className="registration-container">
       <div className="form-container">
         <div>
-          <h2>
-            Registrati
-          </h2>
+          <h2> Registrati </h2>
           <p>Crea il tuo account</p>
         </div>
-
         <div className="form-fields">
-          
           {/* Username */}
           <div className="form-group">
             <label>Nome Utente</label>
@@ -182,7 +168,7 @@ function RegistrationForm() {
               value={formData.username}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Scegli un username"
+              placeholder="Inserisci il tuo nome utente"
               className={errors.username && touched.username ? 'input-error' : ''}
             />
             {errors.username && touched.username && (
@@ -201,7 +187,7 @@ function RegistrationForm() {
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="tu@esempio.com"
+              placeholder="utente@esempio.com"
               className={errors.email && touched.email ? 'input-error' : ''}
             />
             {errors.email && touched.email && (
@@ -221,23 +207,29 @@ function RegistrationForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="••••••••"
-              className={!passwordCriteriaMet && formData.password.length > 0 ? 'input-error' : ''}
+              className={errors.password && touched.password ? 'input-error' : ''}
             />
-            
-            {formData.password && (
-              <div className="password-feedback">
-                {[
-                  { key: 'length', label: 'Almeno 8 caratteri' },
-                  { key: 'uppercase', label: 'Una lettera maiuscola' },
-                  { key: 'lowercase', label: 'Una lettera minuscola' },
-                  { key: 'number', label: 'Un numero' },
-                  { key: 'special', label: 'Un carattere speciale (!@#$...)' }
-                ].map(({ key, label }) => (
-                  <p key={key} className={passwordRequirements[key] ? 'met' : 'not-met'}>
-                    {label}</p>
-                ))}
-              </div>
+            {errors.password && touched.password && (
+              <p className="error-text">
+                <span>⚠️</span> {errors.password}
+              </p>
             )}
+
+            {/* Feedback Requisiti Password */}
+            <div className="password-feedback">
+              <p className="feedback-title">La password deve contenere:</p>
+              {Object.entries({
+                length: 'Almeno 8 caratteri',
+                uppercase: 'Una lettera maiuscola (A-Z)',
+                lowercase: 'Una lettera minuscola (a-z)',
+                number: 'Un numero (0-9)',
+                special: 'Un carattere speciale (!@#$%)',
+              }).map(([key, label]) => (
+                <p key={key} className={passwordRequirements[key] ? 'met' : 'not-met'}>
+                    <span>{passwordRequirements[key] ? '✓' : '•'}</span> {label}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Conferma Password */}
