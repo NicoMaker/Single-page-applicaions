@@ -15,6 +15,15 @@ body {
   padding: 20px;
 }
 
+.registration-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
 /* Container principale del form */
 .form-container {
   max-width: 480px;
@@ -38,6 +47,11 @@ body {
   }
 }
 
+.form-container > div:first-child {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
 .form-container h2 {
   font-size: 2.5rem;
   font-weight: 800;
@@ -45,20 +59,23 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-align: center;
   margin-bottom: 8px;
 }
 
-.form-container > p {
-  text-align: center;
+.form-container > div:first-child p {
   color: #64748b;
-  margin-bottom: 32px;
   font-size: 0.95rem;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 /* Form groups */
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 0; /* Rimosso per usare gap */
 }
 
 .form-group label {
@@ -67,7 +84,6 @@ body {
   font-size: 0.875rem;
   color: #334155;
   margin-bottom: 8px;
-  letter-spacing: 0.3px;
 }
 
 .form-group input {
@@ -84,7 +100,6 @@ body {
 .form-group input:focus {
   border-color: #667eea;
   box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-  transform: translateY(-2px);
 }
 
 .form-group input::placeholder {
@@ -101,15 +116,22 @@ body {
   box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1) !important;
 }
 
-/* Messaggi di errore */
-.error-text {
-  color: #ef4444;
+/* Messaggi di errore e successo */
+.error-text, .success-text {
   font-size: 0.875rem;
   margin-top: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.error-text {
+  color: #ef4444;
   animation: shake 0.3s ease;
+}
+
+.success-text {
+  color: #10b981;
 }
 
 @keyframes shake {
@@ -144,7 +166,6 @@ body {
 .password-feedback .met::before {
   content: '✓';
   font-size: 1.1rem;
-  font-weight: bold;
 }
 
 .password-feedback .not-met {
@@ -171,25 +192,6 @@ body {
   transition: all 0.3s ease;
   margin-top: 12px;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-  position: relative;
-  overflow: hidden;
-}
-
-.submit-button::before,
-.back-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s ease;
-}
-
-.submit-button:hover::before,
-.back-button:hover::before {
-  left: 100%;
 }
 
 .submit-button:hover,
@@ -217,13 +219,13 @@ body {
 
 /* Messaggio di successo */
 .success-message-container {
-  max-width: 480px;
-  width: 100%;
   background: white;
   border-radius: 24px;
-  padding: 48px 40px;
-  text-align: center;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
   animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
@@ -238,23 +240,16 @@ body {
   }
 }
 
+.success-emoji {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
 .success-message-container h2 {
   font-size: 2rem;
   color: #10b981;
   margin-bottom: 16px;
-  animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.success-message-container h2::before {
-  content: '🎉';
-  display: block;
-  font-size: 4rem;
-  margin-bottom: 16px;
+  font-weight: 800;
 }
 
 .success-message-container p {
@@ -277,6 +272,10 @@ body {
 
   .form-container h2 {
     font-size: 2rem;
+  }
+
+  .success-message-container h2 {
+    font-size: 1.75rem;
   }
 
   .submit-button,
