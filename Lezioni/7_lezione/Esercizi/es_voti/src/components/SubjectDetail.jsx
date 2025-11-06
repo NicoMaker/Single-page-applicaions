@@ -9,7 +9,7 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
   const subjectGrades = grades
     .filter((g) => g.subject === subjectName)
     // Importante: riordina i voti per data
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); 
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Calcolo della media
   const sum = subjectGrades.reduce((s, g) => s + g.grade, 0);
@@ -21,9 +21,14 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
   const isAvgSufficient = (avg) => parseFloat(avg) >= 6;
 
   const handleDeleteSubject = () => {
+    const gradesCount = subjectGrades.length;
+    const gradesMessage =
+      gradesCount === 1
+        ? "L'unico voto associato sarà rimosso!"
+        : `Tutti i ${gradesCount} voti associati saranno rimossi!`;
     if (
       window.confirm(
-        `Sei sicuro di voler ELIMINARE la materia '${subjectName}'? Tutti i ${subjectGrades.length} voti associati saranno rimossi!`
+        `Sei sicuro di voler ELIMINARE la materia '${subjectName}'? ${gradesMessage}`
       )
     ) {
       onDeleteSubject(subjectName);
