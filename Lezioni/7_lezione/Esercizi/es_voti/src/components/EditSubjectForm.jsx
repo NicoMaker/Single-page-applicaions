@@ -1,11 +1,11 @@
 // src/components/EditSubjectForm.jsx
-import React, { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const EditSubjectForm = ({ onEditSubject }) => {
   const { subjectName: oldName } = useParams();
   const [newName, setNewName] = useState(oldName);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -13,52 +13,48 @@ const EditSubjectForm = ({ onEditSubject }) => {
     const trimmedNewName = newName.trim();
 
     if (!trimmedNewName) {
-      setError('Il nome della materia non può essere vuoto.');
+      setError("Il nome della materia non può essere vuoto.");
       return;
     }
-    
+
     // Richiama la funzione di modifica in App.jsx
     const success = onEditSubject(oldName, trimmedNewName);
 
     if (success) {
       // REINDIRIZZAMENTO AUTOMATICO
       alert(`Materia '${oldName}' modificata in '${trimmedNewName}'.`);
-      navigate(`/subject/${trimmedNewName}`); 
+      navigate(`/subject/${trimmedNewName}`);
     } else {
-      setError('Errore nella modifica della materia.'); 
+      setError("Errore nella modifica della materia.");
     }
   };
 
-  const inputStyle = (hasError) => ({
-    display: 'block', 
-    width: '95%', 
-    padding: '5px', 
-    marginBottom: '5px',
-    border: `1px solid ${error ? 'red' : 'black'}`,
-  });
-  
   return (
-    <div style={{ border: '2px solid purple', padding: '15px', marginTop: '10px' }}>
+    <div className="form-container form-edit-subject">
       <h3>MODIFICA MATERIA: {oldName}</h3>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="newName" style={{ display: 'block', fontWeight: 'bold' }}>NUOVO NOME (*)</label>
-        <input 
-          type="text" 
-          id="newName" 
-          value={newName} 
-          onChange={(e) => {
+        <div className="form-group">
+          <label htmlFor="newName">NUOVO NOME (*)</label>
+          <input
+            type="text"
+            id="newName"
+            value={newName}
+            onChange={(e) => {
               setNewName(e.target.value);
-              setError('');
-          }} 
-          style={inputStyle(error)} 
-        />
-        {error && <p style={{ color: 'red', fontSize: '0.8em', margin: '0 0 10px 0' }}>{error}</p>}
-        
-        <button type="submit" style={{ padding: '10px', backgroundColor: 'purple', color: 'white', border: '1px solid darkpurple', marginTop: '15px', cursor: 'pointer' }}>
+              setError("");
+            }}
+            className={`form-input ${error ? "input-error" : ""}`}
+          />
+          {error && <p className="error-text">{error}</p>}
+        </div>
+
+        <button type="submit" className="btn-edit-subject">
           SALVA MODIFICHE
         </button>
       </form>
-      <Link to={`/subject/${oldName}`} style={{ display: 'block', marginTop: '15px', color: 'darkblue' }}>← Annulla e torna al dettaglio</Link>
+      <Link to={`/subject/${oldName}`} className="link-back">
+        ← Annulla e torna al dettaglio
+      </Link>
     </div>
   );
 };
