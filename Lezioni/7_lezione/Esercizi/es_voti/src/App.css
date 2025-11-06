@@ -117,10 +117,10 @@ body {
   color: #2e7d32;
 }
 .bg-insufficient {
-  background-color: #ffcdd2;
+  background-color: #ffcdd2 !important;
 }
 .bg-sufficient {
-  background-color: #c8e6c9;
+  background-color: #c8e6c9 !important;
 }
 .border-insufficient {
   border-color: #c62828;
@@ -298,29 +298,6 @@ button.action-button:hover {
   padding-top: 15px;
 }
 
-/* App.css */
-
-/* ... (altri stili) ... */
-
-/* Colori per Voti e Sfondi (ASSICURATI CHE SIANO COSÌ) */
-
-.grade-insufficient {
-  color: #c62828; /* Rosso per il testo (voto) */
-}
-.grade-sufficient {
-  color: #2e7d32; /* Verde per il testo (voto) */
-}
-
-/* ⬅️ AGGIUNGI QUI !important ⬅️ */
-.bg-insufficient {
-  background-color: #ffcdd2 !important;
-}
-.bg-sufficient {
-  background-color: #c8e6c9 !important;
-}
-
-/* App.css - Aggiungi questi stili */
-
 /* Stili per la Media Complessiva */
 .overall-avg-box {
   background-color: #f5f5f5;
@@ -347,8 +324,8 @@ button.action-button:hover {
 .no-grades-message {
   padding: 15px;
   border-radius: 6px;
-  background-color: #fff3cd; /* Giallo chiaro */
-  color: #856404; /* Testo scuro */
+  background-color: #fff3cd;
+  color: #856404;
   border: 1px solid #ffeeba;
   margin-top: 20px;
   text-align: center;
