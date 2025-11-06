@@ -1,8 +1,7 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import { initialGrades, initialSubjects } from "./data"; 
+import { initialGrades, initialSubjects } from "./data";
 
 import SubjectList from "./components/SubjectList.jsx";
 import SubjectDetail from "./components/SubjectDetail.jsx";
@@ -13,18 +12,39 @@ import EditGradeForm from "./components/EditGradeForm.jsx";
 import "./App.css";
 
 const App = () => {
-  // LO STATO VIENE INIZIALIZZATO CON I DATI DI data.js E SI RESETTA AD OGNI REFRESH
-  const [grades, setGrades] = useState(initialGrades);
-  const [subjects, setSubjects] = useState(initialSubjects);
+  const getInitialState = (key, initialData) => {
+    try {
+      const storedData = localStorage.getItem(key);
+      return storedData ? JSON.parse(storedData) : initialData;
+    } catch (error) {
+      console.error(`Errore nel parsing del localStorage per ${key}:`, error);
+      return initialData;
+    }
+  };
+
+  // Inizializza lo stato con i dati da localStorage o i dati di default
+  const [grades, setGrades] = useState(() =>
+    getInitialState("grades", initialGrades)
+  );
+  const [subjects, setSubjects] = useState(() =>
+    getInitialState("subjects", initialSubjects)
+  );
+
+  // useEffect per salvare i voti nel localStorage ogni volta che cambiano
+  useEffect(() => {
+    localStorage.setItem("grades", JSON.stringify(grades));
+  }, [grades]);
+
+  // useEffect per salvare le materie nel localStorage ogni volta che cambiano
+  useEffect(() => {
+    localStorage.setItem("subjects", JSON.stringify(subjects));
+  }, [subjects]);
 
   // Funzioni di CRUD (rimanenti invariate)
   const addGrade = (newGrade) => {
     const maxId = grades.length > 0 ? Math.max(...grades.map((g) => g.id)) : 0;
     const newId = maxId + 1;
-    setGrades((prevGrades) => [
-      ...prevGrades,
-      { ...newGrade, id: newId },
-    ]);
+    setGrades((prevGrades) => [...prevGrades, { ...newGrade, id: newId }]);
   };
 
   const editGrade = (updatedGrade) => {

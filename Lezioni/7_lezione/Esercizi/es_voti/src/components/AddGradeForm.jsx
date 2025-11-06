@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-// Calcola la data di oggi in formato YYYY-MM-DD per inizializzare il campo
 const today = new Date().toISOString().split('T')[0];
 
 const AddGradeForm = ({ subjects, onAddGrade }) => {
@@ -10,7 +9,7 @@ const AddGradeForm = ({ subjects, onAddGrade }) => {
     exam: "",
     subject: subjects[0] || "",
     grade: "",
-    date: today, // NUOVO: Aggiungi la data
+    date: today, 
   });
 
   const [errors, setErrors] = useState({});
@@ -34,7 +33,6 @@ const AddGradeForm = ({ subjects, onAddGrade }) => {
       newErrors.grade = "Voto deve essere tra 0 e 10.";
     }
 
-    // NUOVO: Validazione Data
     if (!formData.date) newErrors.date = "Data richiesta.";
     
     setErrors(newErrors);
