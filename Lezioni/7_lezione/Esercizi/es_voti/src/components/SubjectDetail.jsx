@@ -97,11 +97,9 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
           </tr>
         </thead>
         <tbody>
-          {/* L'ITERAZIONE MAP QUI SOTTO GARANTISCE CHE OGNI RIGA VENGA PROCESSATA */}
           {subjectGrades.map((grade) => (
             <tr
               key={grade.id}
-              // APPLICA IL COLORE DI SFONDO (BG-COLOR) AD OGNI RIGA
               className={
                 isSufficient(grade.grade) ? "bg-sufficient" : "bg-insufficient"
               }
@@ -138,7 +136,6 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
         </tbody>
       </table>
 
-      {/* Messaggio quando non ci sono voti (omitted for brevity) */}
       {subjectGrades.length === 0 && (
         <p className="no-grades-message">
           Nessun voto presente per questa materia. Usa i pulsanti sopra per

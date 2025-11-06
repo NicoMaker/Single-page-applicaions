@@ -1,4 +1,4 @@
-// src/components/EditGradeForm.jsx
+
 import React, { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
@@ -47,7 +47,6 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
       newErrors.grade = "Voto deve essere tra 0 e 10.";
     }
 
-    // VALIDAZIONE DATA
     if (!formData.date) newErrors.date = "Data richiesta.";
 
     setErrors(newErrors);
@@ -57,7 +56,6 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // PREPARA I DATI PER LA MODIFICA, INCLUSA LA DATA
       const updatedGrade = {
         id: numericGradeId,
         exam: formData.exam.trim(),
@@ -68,7 +66,6 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
 
       onEditGrade(updatedGrade);
       alert("Voto modificato con successo!");
-      // Torna alla pagina di dettaglio della materia
       navigate(`/subject/${updatedGrade.subject}`);
     }
   };
@@ -78,7 +75,6 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
       <h3>MODIFICA VOTO</h3>
       <form onSubmit={handleSubmit}>
         
-        {/* NUOVO CAMPO DATA */}
         <div className="form-group">
           <label htmlFor="date">DATA ESAME (*)</label>
           <input
@@ -91,7 +87,6 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
           />
           {errors.date && <p className="error-text">{errors.date}</p>}
         </div>
-        {/* FINE NUOVO CAMPO DATA */}
 
         <div className="form-group">
           <label htmlFor="exam">NOME ESAME (*)</label>
@@ -114,7 +109,7 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
             value={formData.subject}
             onChange={handleChange}
             className="form-input"
-            disabled // Non permettiamo la modifica della materia
+            disabled 
           >
             <option value={formData.subject}>{formData.subject}</option>
           </select>

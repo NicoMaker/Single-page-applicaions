@@ -1,4 +1,4 @@
-// src/components/EditSubjectForm.jsx
+
 import React, { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
@@ -16,12 +16,10 @@ const EditSubjectForm = ({ onEditSubject }) => {
       setError("Il nome della materia non può essere vuoto.");
       return;
     }
-
-    // Richiama la funzione di modifica in App.jsx
+    
     const success = onEditSubject(oldName, trimmedNewName);
 
     if (success) {
-      // REINDIRIZZAMENTO AUTOMATICO
       alert(`Materia '${oldName}' modificata in '${trimmedNewName}'.`);
       navigate(`/subject/${trimmedNewName}`);
     } else {

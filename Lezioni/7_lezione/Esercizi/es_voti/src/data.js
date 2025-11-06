@@ -1,6 +1,4 @@
-// src/data.js
 
-// Materie di base complete
 export const initialSubjects = [
   'Matematica', 
   'Italiano', 
@@ -10,7 +8,6 @@ export const initialSubjects = [
   'Informatica'
 ]; 
 
-// Dati iniziali dei voti
 export const initialGrades = [
   { id: 1, subject: 'Matematica', exam: 'Verifica Funzioni', grade: 8.0, date: '2025-10-20' },
   { id: 2, subject: 'Matematica', exam: 'Interrogazione Geometria', grade: 6.5, date: '2025-11-05' },

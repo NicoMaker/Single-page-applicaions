@@ -1,4 +1,3 @@
-// src/components/AddSubjectForm.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -16,11 +15,9 @@ const AddSubjectForm = ({ onAddSubject }) => {
       return;
     }
 
-    // Prova ad aggiungere la materia
     const success = onAddSubject(name);
 
     if (success) {
-      // REINDIRIZZAMENTO AUTOMATICO
       alert(
         `Materia '${name}' aggiunta con successo. Tornando al dashboard...`
       );
