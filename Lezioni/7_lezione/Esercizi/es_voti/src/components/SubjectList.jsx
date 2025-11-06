@@ -38,6 +38,10 @@ const SubjectList = ({ grades, subjects }) => {
   };
 
   const subjectStats = calculateStats();
+
+  subjectStats.sort((a, b) => {
+    return (b.avg !== "N/A" ? b.avg : 0) - (a.avg !== "N/A" ? a.avg : 0);
+  });
   const totalGradesCount = grades.length;
   const totalGradesSum = grades.reduce((sum, grade) => sum + grade.grade, 0);
   const overallAvg =
