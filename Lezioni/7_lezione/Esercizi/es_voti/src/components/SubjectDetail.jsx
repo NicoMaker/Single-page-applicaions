@@ -54,32 +54,31 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
       <h3>DETTAGLIO VOTI PER {subjectName.toUpperCase()}</h3>
 
       <div className="subject-detail-header">
-        <p>
-          MEDIA ATTUALE:{" "}
-          <span className={avg < 6 ? "grade-insufficient" : "grade-sufficient"}>
+        <div className="subject-detail-info">
+          <p>MEDIA ATTUALE</p>
+          <p
+            className={`avg-value ${
+              avg < 6 ? "grade-insufficient" : "grade-sufficient"
+            }`}
+          >
             {avg}
-          </span>
-        </p>
+          </p>
+        </div>
 
-        {/* PULSANTE MODIFICA NOME (SEMPRE VISIBILE) */}
-        <Link
-          to={`/edit-subject/${subjectName}`}
-          className="action-link link-edit"
-        >
-          [ MODIFICA NOME MATERIA ]
-        </Link>
-
-        {/* PULSANTE ELIMINA MATERIA (SEMPRE VISIBILE) */}
-        <button
-          onClick={handleDeleteSubject}
-          className="action-button btn-delete-subject"
-        >
-          [ ELIMINA MATERIA ]
-        </button>
-
-        <Link to="/" className="link-back">
-          ← Torna al riepilogo
-        </Link>
+        <div className="subject-detail-actions">
+          <Link
+            to={`/edit-subject/${subjectName}`}
+            className="action-link link-edit"
+          >
+            Modifica Nome
+          </Link>
+          <button
+            onClick={handleDeleteSubject}
+            className="action-button btn-delete-subject"
+          >
+            Elimina Materia
+          </button>
+        </div>
       </div>
 
       {/* Elenco Voti */}
@@ -112,7 +111,7 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
                   to={`/edit-grade/${grade.id}`}
                   className="action-link link-edit"
                 >
-                  [ MODIFICA ]
+                  Modifica
                 </Link>
                 <button
                   onClick={() => handleDeleteGrade(grade.id, grade.exam)}
@@ -134,6 +133,9 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
           modificarla o eliminarla.
         </p>
       )}
+      <Link to="/" className="link-back">
+        ← Torna al riepilogo
+      </Link>
     </div>
   );
 };

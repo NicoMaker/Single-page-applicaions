@@ -260,13 +260,34 @@ button.action-button:hover {
 
 /* Dettaglio Materia */
 .subject-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 20px;
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;
 }
-.subject-detail-header p {
-  font-weight: bold;
+
+.subject-detail-info {
+  flex-grow: 1;
+}
+
+.subject-detail-info p {
+  margin: 0;
   font-size: 1.1em;
+  color: #555;
+}
+
+.subject-detail-info .avg-value {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.subject-detail-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 }
 
 .no-grades-message {
