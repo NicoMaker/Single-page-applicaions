@@ -1,9 +1,7 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
 const SubjectList = ({ grades, subjects }) => {
-  // Funzione helper per la sufficienza
   const isSufficient = (value) => parseFloat(value) >= 6;
 
   const calculateStats = () => {
@@ -40,13 +38,13 @@ const SubjectList = ({ grades, subjects }) => {
   };
 
   const subjectStats = calculateStats();
-
-  // CALCOLO: MEDIA COMPLESSIVA
   const totalGradesCount = grades.length;
   const totalGradesSum = grades.reduce((sum, grade) => sum + grade.grade, 0);
   const overallAvg =
-    totalGradesCount > 0 ? (totalGradesSum / totalGradesCount).toFixed(2) : "N/A";
-  
+    totalGradesCount > 0
+      ? (totalGradesSum / totalGradesCount).toFixed(2)
+      : "N/A";
+
   const isOverallAvgSufficient = isSufficient(overallAvg);
 
   if (subjects.length === 0) {
@@ -54,8 +52,8 @@ const SubjectList = ({ grades, subjects }) => {
       <div className="component-container no-data-container">
         <h3>Dashboard Voti</h3>
         <p className="no-grades-message">
-          Non hai ancora aggiunto nessuna materia. Usa il pulsante
-          **[+ Materia]** nel menu in alto per iniziare!
+          Non hai ancora aggiunto nessuna materia. Usa il pulsante **[+
+          Materia]** nel menu in alto per iniziare!
         </p>
       </div>
     );
@@ -89,7 +87,16 @@ const SubjectList = ({ grades, subjects }) => {
         </thead>
         <tbody>
           {subjectStats.map((stat) => (
-            <tr key={stat.subject}>
+            <tr
+              key={stat.subject}
+              className={
+                stat.avg !== "N/A"
+                  ? isSufficient(stat.avg)
+                    ? "bg-sufficient"
+                    : "bg-insufficient"
+                  : ""
+              }
+            >
               <td className="font-bold">{stat.subject}</td>
               <td className="text-center font-bold">{stat.count}</td>
               <td
