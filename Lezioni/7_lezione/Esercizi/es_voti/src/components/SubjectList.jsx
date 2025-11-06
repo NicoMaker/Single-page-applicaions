@@ -3,18 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SubjectList = ({ grades, subjects }) => {
-  // FUNZIONE PER DETERMINARE SE UN VOTO/STAT È SUFFICIENTE (>= 6.0)
+  // Funzione helper per la sufficienza
   const isSufficient = (value) => parseFloat(value) >= 6;
 
   const calculateStats = () => {
-    // 1. Raggruppa i voti esistenti per materia
     const groupedGrades = grades.reduce((acc, grade) => {
       acc[grade.subject] = acc[grade.subject] || [];
       acc[grade.subject].push(grade.grade);
       return acc;
     }, {});
 
-    // 2. Itera su TUTTE le materie disponibili
     const allSubjectStats = subjects.map((subject) => {
       const gradesArray = groupedGrades[subject] || [];
 
@@ -43,9 +41,43 @@ const SubjectList = ({ grades, subjects }) => {
 
   const subjectStats = calculateStats();
 
+  // NUOVO CALCOLO: MEDIA COMPLESSIVA
+  const totalGradesCount = grades.length;
+  const totalGradesSum = grades.reduce((sum, grade) => sum + grade.grade, 0);
+  const overallAvg =
+    totalGradesCount > 0 ? (totalGradesSum / totalGradesCount).toFixed(2) : "N/A";
+  
+  const isOverallAvgSufficient = isSufficient(overallAvg);
+
+  // MESSAGGIO SE NON CI SONO MATERIE/VOTI
+  if (subjects.length === 0) {
+    return (
+      <div className="component-container no-data-container">
+        <h3>Dashboard Voti</h3>
+        <p className="no-grades-message">
+          Non hai ancora aggiunto nessuna materia. Usa il pulsante
+          **[+ Materia]** nel menu in alto per iniziare!
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="component-container">
       <h3>RIEPILOGO MATERIE</h3>
+
+      {/* BOX MEDIA COMPLESSIVA */}
+      <div className="overall-avg-box">
+        <p className="avg-label">MEDIA COMPLESSIVA GENERALE</p>
+        <p
+          className={`overall-avg-value ${
+            isOverallAvgSufficient ? "grade-sufficient" : "grade-insufficient"
+          }`}
+        >
+          {overallAvg}
+        </p>
+      </div>
+      {/* FINE BOX MEDIA COMPLESSIVA */}
 
       <table className="styled-table">
         <thead>
@@ -63,7 +95,7 @@ const SubjectList = ({ grades, subjects }) => {
             <tr key={stat.subject}>
               <td className="font-bold">{stat.subject}</td>
               <td className="text-center font-bold">{stat.count}</td>
-              {/* LOGICA PER MIN - ORA CON >= 6 */}
+              {/* Voto Minimo */}
               <td
                 className={`text-center ${
                   stat.min !== "N/A"
@@ -75,7 +107,7 @@ const SubjectList = ({ grades, subjects }) => {
               >
                 {stat.min}
               </td>
-              {/* LOGICA PER MAX - ORA CON >= 6 */}
+              {/* Voto Massimo */}
               <td
                 className={`text-center ${
                   stat.max !== "N/A"
@@ -87,7 +119,7 @@ const SubjectList = ({ grades, subjects }) => {
               >
                 {stat.max}
               </td>
-              {/* LOGICA PER MEDIA - ORA CON >= 6 */}
+              {/* Media Materia */}
               <td
                 className={`text-center font-bold ${
                   stat.avg !== "N/A"
@@ -100,7 +132,7 @@ const SubjectList = ({ grades, subjects }) => {
                 {stat.avg}
               </td>
 
-              {/* LINK AL DETTAGLIO */}
+              {/* Link al Dettaglio */}
               <td className="text-center">
                 <Link
                   to={`/subject/${stat.subject}`}

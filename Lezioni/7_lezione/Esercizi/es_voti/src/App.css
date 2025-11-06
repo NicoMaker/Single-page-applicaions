@@ -319,3 +319,39 @@ button.action-button:hover {
 .bg-sufficient {
   background-color: #c8e6c9 !important;
 }
+
+
+/* App.css - Aggiungi questi stili */
+
+/* Stili per la Media Complessiva */
+.overall-avg-box {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.avg-label {
+  font-size: 0.9em;
+  color: #555;
+  margin: 0;
+}
+
+.overall-avg-value {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 5px 0 0 0;
+}
+
+/* Stili per il messaggio No Data (per la dashboard vuota) */
+.no-grades-message {
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #fff3cd; /* Giallo chiaro */
+  color: #856404; /* Testo scuro */
+  border: 1px solid #ffeeba;
+  margin-top: 20px;
+  text-align: center;
+}
