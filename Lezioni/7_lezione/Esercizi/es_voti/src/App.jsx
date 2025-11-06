@@ -10,8 +10,8 @@ import EditSubjectForm from "./components/EditSubjectForm.jsx";
 import EditGradeForm from "./components/EditGradeForm.jsx";
 import "./App.css"; // Importa il foglio di stile
 
-// Materie di base
-const initialSubjects = ["Matematica", "Italiano", "Storia", "Inglese"];
+// Materie di base (assumendo che siano queste le initialSubjects)
+const initialSubjects = ["Matematica", "Italiano", "Storia", "Inglese", "Scienze", "Informatica"];
 
 const App = () => {
   const [grades, setGrades] = useState(initialGrades);
@@ -25,7 +25,7 @@ const App = () => {
       {
         ...newGrade,
         id: newId,
-        date: new Date().toISOString().split("T")[0],
+        // La data (newGrade.date) ORA viene dal form AddGradeForm
       },
     ]);
   };
@@ -33,74 +33,65 @@ const App = () => {
   // Funzione per MODIFICARE un voto esistente
   const editGrade = (updatedGrade) => {
     setGrades((prevGrades) =>
-      prevGrades.map((g) =>
-        g.id === updatedGrade.id
-          ? {
-              ...updatedGrade,
-              grade: parseFloat(updatedGrade.grade),
-            }
-          : g
-      )
+      prevGrades.map((g) => (g.id === updatedGrade.id ? updatedGrade : g))
     );
-    return true;
   };
 
-  // Funzione: Elimina un voto per ID
-  const deleteGrade = (idToDelete) => {
-    setGrades((prevGrades) => prevGrades.filter((g) => g.id !== idToDelete));
-  };
-
-  // Funzione per aggiungere una nuova materia
-  const addSubject = (newSubjectName) => {
-    const name = newSubjectName.trim();
-    if (subjects.includes(name)) return false;
-    setSubjects((prevSubjects) => [...prevSubjects, name]);
-    return true;
-  };
-
-  // Funzione per MODIFICARE una materia esistente (OK anche senza voti)
-  const editSubject = (oldName, newName) => {
-    const trimmedNewName = newName.trim();
-    if (subjects.filter((sub) => sub !== oldName).includes(trimmedNewName))
-      return false;
-
-    // 1. Aggiorna l'elenco delle materie
-    setSubjects((prevSubjects) =>
-      prevSubjects.map((sub) => (sub === oldName ? trimmedNewName : sub))
-    );
-
-    // 2. Aggiorna i voti associati
-    setGrades((prevGrades) =>
-      prevGrades.map((grade) =>
-        grade.subject === oldName
-          ? { ...grade, subject: trimmedNewName }
-          : grade
-      )
-    );
-    return true;
-  };
-
-  // Funzione: Elimina una materia per nome (OK anche senza voti)
+  // Funzione per eliminare una materia e tutti i suoi voti
   const deleteSubject = (subjectName) => {
-    // 1. Rimuovi la materia dall'elenco
+    // Rimuove tutti i voti associati
+    setGrades((prevGrades) =>
+      prevGrades.filter((g) => g.subject !== subjectName)
+    );
+    // Rimuove la materia dalla lista
     setSubjects((prevSubjects) =>
-      prevSubjects.filter((sub) => sub !== subjectName)
+      prevSubjects.filter((s) => s !== subjectName)
+    );
+  };
+
+  // Funzione per eliminare un singolo voto
+  const deleteGrade = (id) => {
+    setGrades((prevGrades) => prevGrades.filter((g) => g.id !== id));
+  };
+
+  // Funzione per aggiungere una materia
+  const addSubject = (subjectName) => {
+    if (subjects.includes(subjectName)) {
+      return false; // Fallito: la materia esiste già
+    }
+    setSubjects((prevSubjects) => [...prevSubjects, subjectName]);
+    return true; // Successo
+  };
+
+  // Funzione per MODIFICARE il nome di una materia
+  const editSubject = (oldName, newName) => {
+    // 1. Controlla se il nuovo nome è già in uso
+    if (oldName !== newName && subjects.includes(newName)) {
+      return false;
+    }
+
+    // 2. Aggiorna il nome della materia nella lista delle subjects
+    setSubjects((prevSubjects) =>
+      prevSubjects.map((s) => (s === oldName ? newName : s))
     );
 
-    // 2. Rimuovi tutti i voti associati a quella materia
+    // 3. Aggiorna il nome della materia in tutti i voti
     setGrades((prevGrades) =>
-      prevGrades.filter((grade) => grade.subject !== subjectName)
+      prevGrades.map((g) =>
+        g.subject === oldName ? { ...g, subject: newName } : g
+      )
     );
+    return true;
   };
 
   return (
     <Router>
       <div className="app-container">
         <header className="app-header">
-          <h2>MONITOR Voti React</h2>
+          <h2>Registro Voti App</h2>
           <nav>
             <Link to="/" className="nav-dashboard">
-              [Dashboard Voti]
+              Dashboard
             </Link>
             <Link to="/add" className="nav-add-grade">
               [+ Voto]
@@ -112,13 +103,13 @@ const App = () => {
         </header>
 
         <Routes>
-          {/* PASSA 'subjects' qui per SubjectList */}
+          {/* Dashboard */}
           <Route
             path="/"
             element={<SubjectList grades={grades} subjects={subjects} />}
           />
 
-          {/* PASSA LE FUNZIONI DI ELIMINAZIONE A SubjectDetail */}
+          {/* Dettaglio Materia (dove sono tutti i voti) */}
           <Route
             path="/subject/:subjectName"
             element={
@@ -130,19 +121,25 @@ const App = () => {
             }
           />
 
-          {/* PASSA TUTTE LE FUNZIONI AI FORM */}
+          {/* Form Aggiunta Voto */}
           <Route
             path="/add"
             element={<AddGradeForm subjects={subjects} onAddGrade={addGrade} />}
           />
+
+          {/* Form Aggiunta Materia */}
           <Route
             path="/add-subject"
             element={<AddSubjectForm onAddSubject={addSubject} />}
           />
+
+          {/* Form Modifica Materia */}
           <Route
             path="/edit-subject/:subjectName"
             element={<EditSubjectForm onEditSubject={editSubject} />}
           />
+
+          {/* Form Modifica Voto */}
           <Route
             path="/edit-grade/:gradeId"
             element={

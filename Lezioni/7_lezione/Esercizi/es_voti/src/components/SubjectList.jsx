@@ -3,6 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SubjectList = ({ grades, subjects }) => {
+  // FUNZIONE PER DETERMINARE SE UN VOTO/STAT È SUFFICIENTE (>= 6.0)
+  const isSufficient = (value) => parseFloat(value) >= 6;
+
   const calculateStats = () => {
     // 1. Raggruppa i voti esistenti per materia
     const groupedGrades = grades.reduce((acc, grade) => {
@@ -60,33 +63,44 @@ const SubjectList = ({ grades, subjects }) => {
             <tr key={stat.subject}>
               <td className="font-bold">{stat.subject}</td>
               <td className="text-center font-bold">{stat.count}</td>
+              {/* LOGICA PER MIN - ORA CON >= 6 */}
               <td
                 className={`text-center ${
-                  stat.avg !== "N/A" && stat.min < 6 ? "grade-insufficient" : ""
+                  stat.min !== "N/A"
+                    ? isSufficient(stat.min)
+                      ? "grade-sufficient"
+                      : "grade-insufficient"
+                    : ""
                 }`}
               >
                 {stat.min}
               </td>
+              {/* LOGICA PER MAX - ORA CON >= 6 */}
               <td
                 className={`text-center ${
-                  stat.avg !== "N/A" && stat.max < 6 ? "grade-insufficient" : ""
+                  stat.max !== "N/A"
+                    ? isSufficient(stat.max)
+                      ? "grade-sufficient"
+                      : "grade-insufficient"
+                    : ""
                 }`}
               >
                 {stat.max}
               </td>
+              {/* LOGICA PER MEDIA - ORA CON >= 6 */}
               <td
                 className={`text-center font-bold ${
                   stat.avg !== "N/A"
-                    ? stat.avg < 6
-                      ? "grade-insufficient"
-                      : "grade-sufficient"
+                    ? isSufficient(stat.avg)
+                      ? "grade-sufficient"
+                      : "grade-insufficient"
                     : ""
                 }`}
               >
                 {stat.avg}
               </td>
 
-              {/* LINK AL DETTAGLIO: SEMPRE PRESENTE PER MATERIE ANCHE SENZA VOTI */}
+              {/* LINK AL DETTAGLIO */}
               <td className="text-center">
                 <Link
                   to={`/subject/${stat.subject}`}

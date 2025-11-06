@@ -8,7 +8,8 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
 
   const subjectGrades = grades
     .filter((g) => g.subject === subjectName)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+    // Importante: riordina i voti per data
+    .sort((a, b) => new Date(b.date) - new Date(a.date)); 
 
   // Calcolo della media
   const sum = subjectGrades.reduce((s, g) => s + g.grade, 0);
@@ -16,7 +17,11 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
     subjectGrades.length > 0 ? sum / subjectGrades.length : 0
   ).toFixed(2);
 
-  // FUNZIONE PER ELIMINARE LA MATERIA
+  // FUNZIONE PER DETERMINARE SE UN VOTO È SUFFICIENTE (>= 6.0)
+  const isSufficient = (grade) => grade >= 6;
+  const isAvgSufficient = (avg) => parseFloat(avg) >= 6;
+
+  // FUNZIONE PER ELIMINARE LA MATERIA (omitted for brevity)
   const handleDeleteSubject = () => {
     if (
       window.confirm(
@@ -25,11 +30,11 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
     ) {
       onDeleteSubject(subjectName);
       alert(`Materia '${subjectName}' eliminata.`);
-      navigate("/"); // Torna alla dashboard dopo l'eliminazione
+      navigate("/");
     }
   };
 
-  // FUNZIONE PER ELIMINARE UN SINGOLO VOTO
+  // FUNZIONE PER ELIMINARE UN SINGOLO VOTO (omitted for brevity)
   const handleDeleteGrade = (id, examName) => {
     if (
       window.confirm(
@@ -45,9 +50,9 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
     <div
       className={`component-container ${
         subjectGrades.length > 0
-          ? avg < 6
-            ? "border-insufficient"
-            : "border-sufficient"
+          ? isAvgSufficient(avg)
+            ? "border-sufficient"
+            : "border-insufficient"
           : ""
       }`}
     >
@@ -58,7 +63,7 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
           <p>MEDIA ATTUALE</p>
           <p
             className={`avg-value ${
-              avg < 6 ? "grade-insufficient" : "grade-sufficient"
+              isAvgSufficient(avg) ? "grade-sufficient" : "grade-insufficient"
             }`}
           >
             {avg}
@@ -92,16 +97,23 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
           </tr>
         </thead>
         <tbody>
+          {/* L'ITERAZIONE MAP QUI SOTTO GARANTISCE CHE OGNI RIGA VENGA PROCESSATA */}
           {subjectGrades.map((grade) => (
             <tr
               key={grade.id}
-              className={grade.grade < 6 ? "bg-insufficient" : "bg-sufficient"}
+              // APPLICA IL COLORE DI SFONDO (BG-COLOR) AD OGNI RIGA
+              className={
+                isSufficient(grade.grade) ? "bg-sufficient" : "bg-insufficient"
+              }
             >
               <td>{grade.date}</td>
               <td className="font-bold">{grade.exam}</td>
               <td
                 className={`text-center font-bold ${
-                  grade.grade < 6 ? "grade-insufficient" : "grade-sufficient"
+                  // APPLICA IL COLORE AL TESTO (TEXT-COLOR) AD OGNI VOTO
+                  isSufficient(grade.grade)
+                    ? "grade-sufficient"
+                    : "grade-insufficient"
                 }`}
               >
                 {grade.grade.toFixed(1)}
@@ -126,7 +138,7 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
         </tbody>
       </table>
 
-      {/* Messaggio quando non ci sono voti */}
+      {/* Messaggio quando non ci sono voti (omitted for brevity) */}
       {subjectGrades.length === 0 && (
         <p className="no-grades-message">
           Nessun voto presente per questa materia. Usa i pulsanti sopra per

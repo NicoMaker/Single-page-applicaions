@@ -25,6 +25,7 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
     exam: originalGrade.exam,
     subject: originalGrade.subject,
     grade: originalGrade.grade.toString(),
+    date: originalGrade.date, // RECUPERA LA DATA ESISTENTE
   });
   const [errors, setErrors] = useState({});
 
@@ -46,6 +47,9 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
       newErrors.grade = "Voto deve essere tra 0 e 10.";
     }
 
+    // VALIDAZIONE DATA
+    if (!formData.date) newErrors.date = "Data richiesta.";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -53,32 +57,42 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      // PREPARA I DATI PER LA MODIFICA, INCLUSA LA DATA
       const updatedGrade = {
         id: numericGradeId,
         exam: formData.exam.trim(),
         subject: formData.subject,
         grade: parseFloat(formData.grade),
-        date: originalGrade.date,
+        date: formData.date, // DATA INCLUSA
       };
 
-      const success = onEditGrade(updatedGrade);
-
-      if (success) {
-        // REINDIRIZZAMENTO AUTOMATICO
-        alert(
-          `Voto modificato con successo. Tornando al dettaglio di ${updatedGrade.subject}...`
-        );
-        navigate(`/subject/${updatedGrade.subject}`);
-      }
+      onEditGrade(updatedGrade);
+      alert("Voto modificato con successo!");
+      // Torna alla pagina di dettaglio della materia
+      navigate(`/subject/${updatedGrade.subject}`);
     }
   };
 
   return (
     <div className="form-container form-edit-grade">
-      <h3>
-        MODIFICA VOTO: {originalGrade.exam} ({originalGrade.subject})
-      </h3>
+      <h3>MODIFICA VOTO</h3>
       <form onSubmit={handleSubmit}>
+        
+        {/* NUOVO CAMPO DATA */}
+        <div className="form-group">
+          <label htmlFor="date">DATA ESAME (*)</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className={`form-input ${errors.date ? "input-error" : ""}`}
+          />
+          {errors.date && <p className="error-text">{errors.date}</p>}
+        </div>
+        {/* FINE NUOVO CAMPO DATA */}
+
         <div className="form-group">
           <label htmlFor="exam">NOME ESAME (*)</label>
           <input
@@ -100,12 +114,9 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
             value={formData.subject}
             onChange={handleChange}
             className="form-input"
+            disabled // Non permettiamo la modifica della materia
           >
-            {subjects.map((sub) => (
-              <option key={sub} value={sub}>
-                {sub}
-              </option>
-            ))}
+            <option value={formData.subject}>{formData.subject}</option>
           </select>
         </div>
 
@@ -130,7 +141,7 @@ const EditGradeForm = ({ grades, subjects, onEditGrade }) => {
         </button>
       </form>
       <Link to={`/subject/${originalGrade.subject}`} className="link-back">
-        ← Annulla e torna al dettaglio
+        ← Annulla
       </Link>
     </div>
   );

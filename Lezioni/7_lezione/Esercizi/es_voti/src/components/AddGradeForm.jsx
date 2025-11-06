@@ -2,11 +2,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+// Helper per ottenere la data di oggi
+const getTodayDate = () => new Date().toISOString().split("T")[0];
+
 const AddGradeForm = ({ subjects, onAddGrade }) => {
   const [formData, setFormData] = useState({
     exam: "",
     subject: subjects[0] || "",
     grade: "",
+    date: getTodayDate(), // IMPOSTA LA DATA DI OGGI COME DEFAULT
   });
 
   const [errors, setErrors] = useState({});
@@ -29,6 +33,9 @@ const AddGradeForm = ({ subjects, onAddGrade }) => {
     } else if (isNaN(gradeValue) || gradeValue < 0 || gradeValue > 10) {
       newErrors.grade = "Voto deve essere tra 0 e 10.";
     }
+    
+    // VALIDAZIONE DATA
+    if (!formData.date) newErrors.date = "Data richiesta.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -37,26 +44,40 @@ const AddGradeForm = ({ subjects, onAddGrade }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      // PREPARA I DATI PER L'AGGIUNTA, INCLUSA LA DATA
       const newGrade = {
         exam: formData.exam.trim(),
         subject: formData.subject,
         grade: parseFloat(formData.grade),
+        date: formData.date, // DATA INCLUSA
       };
 
       onAddGrade(newGrade);
-
-      // REINDIRIZZAMENTO AUTOMATICO
-      alert(
-        `Voto '${newGrade.grade}' per ${newGrade.subject} aggiunto con successo. Tornando al dettaglio...`
-      );
-      navigate(`/subject/${newGrade.subject}`);
+      alert("Voto aggiunto con successo!");
+      navigate("/");
     }
   };
 
   return (
     <div className="form-container form-add-grade">
-      <h3>FORM AGGIUNTA NUOVO VOTO</h3>
+      <h3>AGGIUNGI NUOVO VOTO</h3>
       <form onSubmit={handleSubmit}>
+        
+        {/* NUOVO CAMPO DATA */}
+        <div className="form-group">
+          <label htmlFor="date">DATA ESAME (*)</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className={`form-input ${errors.date ? "input-error" : ""}`}
+          />
+          {errors.date && <p className="error-text">{errors.date}</p>}
+        </div>
+        {/* FINE NUOVO CAMPO DATA */}
+
         <div className="form-group">
           <label htmlFor="exam">NOME ESAME (*)</label>
           <input
@@ -100,7 +121,7 @@ const AddGradeForm = ({ subjects, onAddGrade }) => {
             max="10"
             className={`form-input ${errors.grade ? "input-error" : ""}`}
           />
-          {errors.grade && <p className="error-text">{errors.grade}</p>}
+          {errors.grade && <p className="error-text">{errors.grade}</p>}\
         </div>
 
         <button type="submit" className="btn-add-grade">
@@ -108,7 +129,7 @@ const AddGradeForm = ({ subjects, onAddGrade }) => {
         </button>
       </form>
       <Link to="/" className="link-back">
-        ← Annulla e torna al riepilogo
+        ← Annulla
       </Link>
     </div>
   );

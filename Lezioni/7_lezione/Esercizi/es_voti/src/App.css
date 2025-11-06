@@ -297,3 +297,25 @@ button.action-button:hover {
   border-top: 1px dotted gray;
   padding-top: 15px;
 }
+
+
+/* App.css */
+
+/* ... (altri stili) ... */
+
+/* Colori per Voti e Sfondi (ASSICURATI CHE SIANO COSÌ) */
+
+.grade-insufficient {
+  color: #c62828; /* Rosso per il testo (voto) */
+}
+.grade-sufficient {
+  color: #2e7d32; /* Verde per il testo (voto) */
+}
+
+/* ⬅️ AGGIUNGI QUI !important ⬅️ */
+.bg-insufficient {
+  background-color: #ffcdd2 !important; 
+}
+.bg-sufficient {
+  background-color: #c8e6c9 !important;
+}
