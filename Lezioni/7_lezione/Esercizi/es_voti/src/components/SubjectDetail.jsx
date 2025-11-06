@@ -42,7 +42,15 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
   };
 
   return (
-    <div className="component-container">
+    <div
+      className={`component-container ${
+        subjectGrades.length > 0
+          ? avg < 6
+            ? "border-insufficient"
+            : "border-sufficient"
+          : ""
+      }`}
+    >
       <h3>DETTAGLIO VOTI PER {subjectName.toUpperCase()}</h3>
 
       <div className="subject-detail-header">
