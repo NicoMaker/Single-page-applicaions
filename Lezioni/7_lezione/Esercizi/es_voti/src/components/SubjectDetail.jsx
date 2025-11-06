@@ -9,26 +9,21 @@ const SubjectDetail = ({ grades }) => {
     .filter(g => g.subject === subjectName)
     .sort((a, b) => new Date(b.date) - new Date(a.date)); 
 
-  if (subjectGrades.length === 0) {
-    // Non dovrebbe succedere se arriviamo da SubjectList, ma per sicurezza.
-    return (
-      <div style={{ border: '1px solid black', padding: '10px', marginTop: '10px' }}>
-        <h3>DETTAGLIO: {subjectName}</h3>
-        <p>ERRORE: Voti non trovati.</p>
-        <Link to="/">[Torna Indietro]</Link>
-      </div>
-    );
-  }
-
+  // ... (calcolo media come prima) ...
   const sum = subjectGrades.reduce((s, g) => s + g.grade, 0);
-  const avg = (sum / subjectGrades.length).toFixed(2);
+  const avg = (subjectGrades.length > 0 ? sum / subjectGrades.length : 0).toFixed(2);
 
   return (
     <div style={{ border: '1px solid black', padding: '10px', marginTop: '10px' }}>
       <h3>DETTAGLIO VOTI PER {subjectName.toUpperCase()}</h3>
-      <p style={{ fontWeight: 'bold' }}>MEDIA ATTUALE: <span style={{ color: avg < 6 ? 'red' : 'green' }}>{avg}</span></p>
       
-      <Link to="/" style={{ display: 'block', marginBottom: '10px', color: 'darkblue' }}>← Torna al riepilogo</Link>
+      <div style={{ marginBottom: '10px', borderBottom: '1px dotted black', paddingBottom: '5px' }}>
+          <p style={{ fontWeight: 'bold' }}>MEDIA ATTUALE: <span style={{ color: avg < 6 ? 'red' : 'green' }}>{avg}</span></p>
+          <Link to={`/edit-subject/${subjectName}`} style={{ color: 'orange', textDecoration: 'none', fontWeight: 'bold' }}>
+            [ MODIFICA NOME MATERIA ]
+          </Link>
+          <Link to="/" style={{ display: 'block', marginTop: '5px', color: 'darkblue' }}>← Torna al riepilogo</Link>
+      </div>
       
       <ul style={{ listStyleType: 'none', padding: 0 }}>
         {subjectGrades.map((grade) => (
@@ -39,16 +34,25 @@ const SubjectDetail = ({ grades }) => {
               padding: '8px', 
               marginBottom: '5px',
               backgroundColor: grade.grade < 6 ? 'pink' : 'lightgreen',
+              display: 'flex', 
+              justifyContent: 'space-between',
+              alignItems: 'center'
             }}
           >
-            {grade.date} | 
-            **{grade.exam}**: 
-            <span style={{ fontWeight: 'bold', marginLeft: '5px', color: grade.grade < 6 ? 'red' : 'green' }}>
-                {grade.grade.toFixed(1)}
-            </span>
+            <div>
+                {grade.date} | 
+                **{grade.exam}**: 
+                <span style={{ fontWeight: 'bold', marginLeft: '5px', color: grade.grade < 6 ? 'red' : 'green' }}>
+                    {grade.grade.toFixed(1)}
+                </span>
+            </div>
+            <Link to={`/edit-grade/${grade.id}`} style={{ color: 'orange', fontSize: '0.8em', textDecoration: 'none' }}>
+                [ MODIFICA VOTO ]
+            </Link>
           </li>
         ))}
       </ul>
+      {subjectGrades.length === 0 && <p>Nessun voto in questa materia.</p>}
     </div>
   );
 };
