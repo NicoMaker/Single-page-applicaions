@@ -1,7 +1,14 @@
 // src/data.js
 
-// Elenco delle materie disponibili
-export const subjects = ['Matematica', 'Italiano', 'Storia', 'Inglese', 'Scienze', 'Informatica'];
+// Materie di base complete
+export const initialSubjects = [
+  'Matematica', 
+  'Italiano', 
+  'Storia', 
+  'Inglese', 
+  'Scienze', 
+  'Informatica'
+]; 
 
 // Dati iniziali dei voti
 export const initialGrades = [

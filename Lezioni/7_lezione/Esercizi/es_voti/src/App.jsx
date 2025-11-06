@@ -1,9 +1,11 @@
 // src/App.jsx
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { initialGrades } from "./data"; // Dati iniziali (non persistenti)
+
+// IMPORTAZIONE CORRETTA DA data.js (senza estensione)
+import { initialGrades, initialSubjects } from "./data"; 
+
 import SubjectList from "./components/SubjectList.jsx";
-// ... (omitted other imports)
 import SubjectDetail from "./components/SubjectDetail.jsx";
 import AddGradeForm from "./components/AddGradeForm.jsx";
 import AddSubjectForm from "./components/AddSubjectForm.jsx";
@@ -11,19 +13,15 @@ import EditSubjectForm from "./components/EditSubjectForm.jsx";
 import EditGradeForm from "./components/EditGradeForm.jsx";
 import "./App.css";
 
-// Materie di base (fallback)
-const initialSubjects = ["Matematica", "Italiano", "Storia", "Inglese", "Scienze", "Informatica"];
-
 const App = () => {
-  // Dati iniziali, resettati ad ogni refresh
+  // LO STATO VIENE INIZIALIZZATO CON I DATI DI data.js E SI RESETTA AD OGNI REFRESH
   const [grades, setGrades] = useState(initialGrades);
   const [subjects, setSubjects] = useState(initialSubjects);
 
-  // Funzioni di modifica (rimanenti invariate)
+  // Funzioni di CRUD (rimanenti invariate)
   const addGrade = (newGrade) => {
     const maxId = grades.length > 0 ? Math.max(...grades.map((g) => g.id)) : 0;
     const newId = maxId + 1;
-    
     setGrades((prevGrades) => [
       ...prevGrades,
       { ...newGrade, id: newId },
@@ -97,7 +95,6 @@ const App = () => {
             path="/"
             element={<SubjectList grades={grades} subjects={subjects} />}
           />
-          {/* ... (Altre Route) ... */}
           <Route
             path="/subject/:subjectName"
             element={

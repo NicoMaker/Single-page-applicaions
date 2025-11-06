@@ -41,7 +41,7 @@ const SubjectList = ({ grades, subjects }) => {
 
   const subjectStats = calculateStats();
 
-  // NUOVO CALCOLO: MEDIA COMPLESSIVA
+  // CALCOLO: MEDIA COMPLESSIVA
   const totalGradesCount = grades.length;
   const totalGradesSum = grades.reduce((sum, grade) => sum + grade.grade, 0);
   const overallAvg =
