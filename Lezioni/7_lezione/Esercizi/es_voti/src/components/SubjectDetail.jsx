@@ -7,10 +7,8 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
 
   const subjectGrades = grades
     .filter((g) => g.subject === subjectName)
-    // Importante: riordina i voti per data
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // Calcolo della media
   const sum = subjectGrades.reduce((s, g) => s + g.grade, 0);
   const avg = (
     subjectGrades.length > 0 ? sum / subjectGrades.length : 0
