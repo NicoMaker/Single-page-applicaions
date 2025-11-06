@@ -1,4 +1,3 @@
-// src/components/SubjectDetail.jsx
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
