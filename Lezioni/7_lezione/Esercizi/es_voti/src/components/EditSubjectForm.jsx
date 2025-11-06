@@ -21,8 +21,8 @@ const EditSubjectForm = ({ onEditSubject }) => {
     const success = onEditSubject(oldName, trimmedNewName);
 
     if (success) {
+      // REINDIRIZZAMENTO AUTOMATICO
       alert(`Materia '${oldName}' modificata in '${trimmedNewName}'.`);
-      // Reindirizza alla nuova pagina del dettaglio materia
       navigate(`/subject/${trimmedNewName}`); 
     } else {
       setError('Errore nella modifica della materia.'); 
@@ -34,7 +34,7 @@ const EditSubjectForm = ({ onEditSubject }) => {
     width: '95%', 
     padding: '5px', 
     marginBottom: '5px',
-    border: `1px solid ${hasError ? 'red' : 'black'}`,
+    border: `1px solid ${error ? 'red' : 'black'}`,
   });
   
   return (
@@ -54,11 +54,11 @@ const EditSubjectForm = ({ onEditSubject }) => {
         />
         {error && <p style={{ color: 'red', fontSize: '0.8em', margin: '0 0 10px 0' }}>{error}</p>}
         
-        <button type="submit" style={{ padding: '10px', backgroundColor: 'purple', color: 'white', border: '1px solid purple', cursor: 'pointer', marginTop: '10px' }}>
-          SALVA MODIFICA NOME
+        <button type="submit" style={{ padding: '10px', backgroundColor: 'purple', color: 'white', border: '1px solid darkpurple', marginTop: '15px', cursor: 'pointer' }}>
+          SALVA MODIFICHE
         </button>
       </form>
-      <Link to="/" style={{ display: 'block', marginTop: '10px', color: 'darkblue' }}>← Annulla e torna al riepilogo</Link>
+      <Link to={`/subject/${oldName}`} style={{ display: 'block', marginTop: '15px', color: 'darkblue' }}>← Annulla e torna al dettaglio</Link>
     </div>
   );
 };

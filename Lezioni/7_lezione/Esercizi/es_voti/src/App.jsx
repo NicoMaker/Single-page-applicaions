@@ -6,8 +6,8 @@ import SubjectList from './components/SubjectList.jsx';
 import SubjectDetail from './components/SubjectDetail.jsx';
 import AddGradeForm from './components/AddGradeForm.jsx';
 import AddSubjectForm from './components/AddSubjectForm.jsx';
-import EditSubjectForm from './components/EditSubjectForm.jsx'; // NUOVO COMPONENTE
-import EditGradeForm from './components/EditGradeForm.jsx';     // NUOVO COMPONENTE
+import EditSubjectForm from './components/EditSubjectForm.jsx'; 
+import EditGradeForm from './components/EditGradeForm.jsx';     
 
 // Materie di base
 const initialSubjects = ['Matematica', 'Italiano', 'Storia', 'Inglese'];
@@ -16,7 +16,7 @@ const App = () => {
   const [grades, setGrades] = useState(initialGrades);
   const [subjects, setSubjects] = useState(initialSubjects);
   
-  // Funzione per aggiungere un nuovo voto (come prima)
+  // Funzione per aggiungere un nuovo voto
   const addGrade = (newGrade) => {
     const newId = Math.max(...grades.map(g => g.id), 0) + 1;
     setGrades(prevGrades => [...prevGrades, { 
@@ -29,38 +29,61 @@ const App = () => {
   // Funzione per MODIFICARE un voto esistente
   const editGrade = (updatedGrade) => {
     setGrades(prevGrades => 
-        prevGrades.map(g => g.id === updatedGrade.id ? updatedGrade : g)
+        prevGrades.map(g => g.id === updatedGrade.id ? { 
+            ...updatedGrade, 
+            grade: parseFloat(updatedGrade.grade)
+        } : g)
+    );
+    return true;
+  };
+
+  // Funzione: Elimina un voto per ID
+  const deleteGrade = (idToDelete) => {
+    setGrades(prevGrades => 
+        prevGrades.filter(g => g.id !== idToDelete)
     );
   };
   
-  // Funzione per aggiungere una nuova materia (come prima)
+  // Funzione per aggiungere una nuova materia
   const addSubject = (newSubjectName) => {
-    const capitalizedName = newSubjectName.charAt(0).toUpperCase() + newSubjectName.slice(1).toLowerCase();
-    if (!subjects.includes(capitalizedName)) {
-        setSubjects(prevSubjects => [...prevSubjects, capitalizedName]);
-        return true;
-    }
-    return false; 
+    const name = newSubjectName.trim();
+    if (subjects.includes(name)) return false;
+    setSubjects(prevSubjects => [...prevSubjects, name]);
+    return true;
   };
   
-  // Funzione per MODIFICARE il nome di una materia
+  // Funzione per MODIFICARE una materia esistente (OK anche senza voti)
   const editSubject = (oldName, newName) => {
-    if (oldName === newName) return true;
+    const trimmedNewName = newName.trim();
+    if (subjects.filter(sub => sub !== oldName).includes(trimmedNewName)) return false; 
     
     // 1. Aggiorna l'elenco delle materie
     setSubjects(prevSubjects => 
-        prevSubjects.map(sub => sub === oldName ? newName : sub)
+        prevSubjects.map(sub => sub === oldName ? trimmedNewName : sub)
     );
     
-    // 2. Aggiorna TUTTI i voti associati al vecchio nome
+    // 2. Aggiorna i voti associati
     setGrades(prevGrades => 
         prevGrades.map(grade => 
             grade.subject === oldName 
-                ? { ...grade, subject: newName } 
+                ? { ...grade, subject: trimmedNewName } 
                 : grade
         )
     );
     return true;
+  };
+
+  // Funzione: Elimina una materia per nome (OK anche senza voti)
+  const deleteSubject = (subjectName) => {
+    // 1. Rimuovi la materia dall'elenco
+    setSubjects(prevSubjects => 
+        prevSubjects.filter(sub => sub !== subjectName)
+    );
+    
+    // 2. Rimuovi tutti i voti associati a quella materia
+    setGrades(prevGrades => 
+        prevGrades.filter(grade => grade.subject !== subjectName)
+    );
   };
 
 
@@ -79,13 +102,22 @@ const App = () => {
         </header>
 
         <Routes>
-          <Route path="/" element={<SubjectList grades={grades} subjects={subjects} />} />
-          <Route path="/subject/:subjectName" element={<SubjectDetail grades={grades} />} />
+          {/* PASSA 'subjects' qui per SubjectList */}
+          <Route path="/" element={<SubjectList grades={grades} subjects={subjects} />} /> 
           
+          {/* PASSA LE FUNZIONI DI ELIMINAZIONE A SubjectDetail */}
+          <Route 
+            path="/subject/:subjectName" 
+            element={<SubjectDetail 
+                        grades={grades} 
+                        onDeleteSubject={deleteSubject} 
+                        onDeleteGrade={deleteGrade} 
+                    />} 
+          />
+          
+          {/* PASSA TUTTE LE FUNZIONI AI FORM */}
           <Route path="/add" element={<AddGradeForm subjects={subjects} onAddGrade={addGrade} />} />
           <Route path="/add-subject" element={<AddSubjectForm onAddSubject={addSubject} />} />
-          
-          {/* NUOVE ROTTE DI MODIFICA */}
           <Route path="/edit-subject/:subjectName" element={<EditSubjectForm onEditSubject={editSubject} />} />
           <Route path="/edit-grade/:gradeId" element={<EditGradeForm grades={grades} subjects={subjects} onEditGrade={editGrade} />} />
         </Routes>

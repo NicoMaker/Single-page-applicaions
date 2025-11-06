@@ -1,6 +1,6 @@
 // src/components/AddSubjectForm.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const AddSubjectForm = ({ onAddSubject }) => {
   const [subjectName, setSubjectName] = useState('');
@@ -16,10 +16,11 @@ const AddSubjectForm = ({ onAddSubject }) => {
       return;
     }
 
-    // Prova ad aggiungere la materia tramite la funzione passata da App
+    // Prova ad aggiungere la materia
     const success = onAddSubject(name);
 
     if (success) {
+      // REINDIRIZZAMENTO AUTOMATICO
       alert(`Materia '${name}' aggiunta con successo. Tornando al dashboard...`);
       navigate('/');
     } else {
@@ -29,7 +30,7 @@ const AddSubjectForm = ({ onAddSubject }) => {
 
   const handleChange = (e) => {
     setSubjectName(e.target.value);
-    setError(''); // Pulisci l'errore quando l'utente digita
+    setError(''); 
   };
   
   const inputStyle = (hasError) => ({
@@ -37,7 +38,7 @@ const AddSubjectForm = ({ onAddSubject }) => {
     width: '95%', 
     padding: '5px', 
     marginBottom: '5px',
-    border: `1px solid ${hasError ? 'red' : 'black'}`,
+    border: `1px solid ${hasError ? 'red' : 'black'}`
   });
 
   return (
@@ -54,10 +55,11 @@ const AddSubjectForm = ({ onAddSubject }) => {
         />
         {error && <p style={{ color: 'red', fontSize: '0.8em', margin: '0 0 10px 0' }}>{error}</p>}
         
-        <button type="submit" style={{ padding: '10px', backgroundColor: 'purple', color: 'white', border: '1px solid purple', cursor: 'pointer', marginTop: '10px' }}>
-          CREA MATERIA
+        <button type="submit" style={{ padding: '10px', backgroundColor: 'purple', color: 'white', border: '1px solid darkpurple', marginTop: '15px', cursor: 'pointer' }}>
+          AGGIUNGI MATERIA
         </button>
       </form>
+      <Link to="/" style={{ display: 'block', marginTop: '15px', color: 'darkblue' }}>← Annulla e torna al riepilogo</Link>
     </div>
   );
 };
