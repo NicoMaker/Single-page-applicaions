@@ -74,7 +74,7 @@ const SubjectList = ({ grades, subjects }) => {
             isOverallAvgSufficient ? "grade-sufficient" : "grade-insufficient"
           }`}
         >
-          {overallAvg}
+          {overallAvg}/10
         </p>
       </div>
 
