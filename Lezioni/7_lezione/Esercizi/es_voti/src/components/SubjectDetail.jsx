@@ -66,6 +66,7 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
             }`}
           >
             {avg}
+            <span className="blue">/10</span>
           </p>
         </div>
 
