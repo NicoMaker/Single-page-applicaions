@@ -1,4 +1,4 @@
-// src/components/SubjectList.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -49,7 +49,6 @@ const SubjectList = ({ grades, subjects }) => {
   
   const isOverallAvgSufficient = isSufficient(overallAvg);
 
-  // MESSAGGIO SE NON CI SONO MATERIE/VOTI
   if (subjects.length === 0) {
     return (
       <div className="component-container no-data-container">
@@ -66,7 +65,6 @@ const SubjectList = ({ grades, subjects }) => {
     <div className="component-container">
       <h3>RIEPILOGO MATERIE</h3>
 
-      {/* BOX MEDIA COMPLESSIVA */}
       <div className="overall-avg-box">
         <p className="avg-label">MEDIA COMPLESSIVA GENERALE</p>
         <p
@@ -77,7 +75,6 @@ const SubjectList = ({ grades, subjects }) => {
           {overallAvg}
         </p>
       </div>
-      {/* FINE BOX MEDIA COMPLESSIVA */}
 
       <table className="styled-table">
         <thead>
@@ -95,7 +92,6 @@ const SubjectList = ({ grades, subjects }) => {
             <tr key={stat.subject}>
               <td className="font-bold">{stat.subject}</td>
               <td className="text-center font-bold">{stat.count}</td>
-              {/* Voto Minimo */}
               <td
                 className={`text-center ${
                   stat.min !== "N/A"
@@ -107,7 +103,6 @@ const SubjectList = ({ grades, subjects }) => {
               >
                 {stat.min}
               </td>
-              {/* Voto Massimo */}
               <td
                 className={`text-center ${
                   stat.max !== "N/A"
@@ -119,7 +114,6 @@ const SubjectList = ({ grades, subjects }) => {
               >
                 {stat.max}
               </td>
-              {/* Media Materia */}
               <td
                 className={`text-center font-bold ${
                   stat.avg !== "N/A"
@@ -132,7 +126,6 @@ const SubjectList = ({ grades, subjects }) => {
                 {stat.avg}
               </td>
 
-              {/* Link al Dettaglio */}
               <td className="text-center">
                 <Link
                   to={`/subject/${stat.subject}`}

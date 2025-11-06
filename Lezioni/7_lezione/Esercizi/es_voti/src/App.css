@@ -298,7 +298,6 @@ button.action-button:hover {
   padding-top: 15px;
 }
 
-
 /* App.css */
 
 /* ... (altri stili) ... */
@@ -314,12 +313,11 @@ button.action-button:hover {
 
 /* ⬅️ AGGIUNGI QUI !important ⬅️ */
 .bg-insufficient {
-  background-color: #ffcdd2 !important; 
+  background-color: #ffcdd2 !important;
 }
 .bg-sufficient {
   background-color: #c8e6c9 !important;
 }
-
 
 /* App.css - Aggiungi questi stili */
 

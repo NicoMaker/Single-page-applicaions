@@ -1,8 +1,7 @@
-// src/App.jsx
+
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-// IMPORTAZIONE CORRETTA DA data.js (senza estensione)
 import { initialGrades, initialSubjects } from "./data"; 
 
 import SubjectList from "./components/SubjectList.jsx";

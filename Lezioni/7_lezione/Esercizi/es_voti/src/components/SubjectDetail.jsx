@@ -17,11 +17,9 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
     subjectGrades.length > 0 ? sum / subjectGrades.length : 0
   ).toFixed(2);
 
-  // FUNZIONE PER DETERMINARE SE UN VOTO È SUFFICIENTE (>= 6.0)
   const isSufficient = (grade) => grade >= 6;
   const isAvgSufficient = (avg) => parseFloat(avg) >= 6;
 
-  // FUNZIONE PER ELIMINARE LA MATERIA (omitted for brevity)
   const handleDeleteSubject = () => {
     if (
       window.confirm(
@@ -34,7 +32,6 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
     }
   };
 
-  // FUNZIONE PER ELIMINARE UN SINGOLO VOTO (omitted for brevity)
   const handleDeleteGrade = (id, examName) => {
     if (
       window.confirm(
@@ -108,7 +105,6 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
               <td className="font-bold">{grade.exam}</td>
               <td
                 className={`text-center font-bold ${
-                  // APPLICA IL COLORE AL TESTO (TEXT-COLOR) AD OGNI VOTO
                   isSufficient(grade.grade)
                     ? "grade-sufficient"
                     : "grade-insufficient"
