@@ -170,3 +170,34 @@ function reset() {
 }
 
 
+function confirmNumber() {
+  let inputValue = document.getElementById("currentInput").value.trim();
+
+  // Sostituisci eventuale virgola con punto
+  inputValue = inputValue.replace(",", ".");
+
+  const value = parseFloat(inputValue);
+
+  if (isNaN(value)) {
+    showModal("Inserisci un numero valido!");
+    return;
+  }
+
+  array.push(value);
+  currentIndex++;
+
+  if (currentIndex < totalSize) {
+    document.getElementById("currentInput").value = "";
+    document.getElementById("inputLabel").textContent = `Inserisci elemento ${
+      currentIndex + 1
+    } di ${totalSize}:`;
+
+    if (currentIndex === totalSize - 1) {
+      document.getElementById("confirmBtn").textContent = "FINE";
+    }
+
+    document.getElementById("currentInput").focus();
+  } else {
+    processArray();
+  }
+}
