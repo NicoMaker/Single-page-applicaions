@@ -168,3 +168,5 @@ function reset() {
   currentIndex = 0;
   totalSize = 0;
 }
+
+
