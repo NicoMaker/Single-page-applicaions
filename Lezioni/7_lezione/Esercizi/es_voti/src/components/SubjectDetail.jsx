@@ -10,9 +10,15 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const sum = subjectGrades.reduce((s, g) => s + g.grade, 0);
-  const avg = (
-    subjectGrades.length > 0 ? sum / subjectGrades.length : 0
-  ).toFixed(2);
+  const rawAvg = subjectGrades.length > 0 ? sum / subjectGrades.length : null;
+
+  // Applica la formattazione intelligente
+  const avg =
+    rawAvg == null || isNaN(rawAvg)
+      ? "N/A"
+      : Number.isInteger(rawAvg)
+      ? rawAvg
+      : rawAvg.toFixed(2).replace(/\.?0+$/, "");
 
   const isSufficient = (grade) => grade >= 6;
   const isAvgSufficient = (avg) => parseFloat(avg) >= 6;
@@ -62,10 +68,12 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
           <p>MEDIA ATTUALE</p>
           <p
             className={`avg-value ${
-              isAvgSufficient(avg) ? "grade-sufficient" : "grade-insufficient"
+              avg !== "N/A" && isAvgSufficient(avg)
+                ? "grade-sufficient"
+                : "grade-insufficient"
             }`}
           >
-            {avg}
+            {avg === "N/A" ? "N/A" : avg}
             <span className="blue">/10</span>
           </p>
         </div>
@@ -113,7 +121,9 @@ const SubjectDetail = ({ grades, onDeleteSubject, onDeleteGrade }) => {
                     : "grade-insufficient"
                 }`}
               >
-                {grade.grade.toFixed(1)}
+                {Number.isInteger(grade.grade)
+                  ? grade.grade
+                  : grade.grade.toFixed(1).replace(/\.0$/, "")}
               </td>
               <td className="text-center">
                 <Link

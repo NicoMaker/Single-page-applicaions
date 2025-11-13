@@ -27,9 +27,9 @@ const SubjectList = ({ grades, subjects }) => {
 
       return {
         subject,
-        min: min.toFixed(1),
-        max: max.toFixed(1),
-        avg: avg.toFixed(2),
+        min: min.toFixed(1).replace(/\.0$/, ""), // mostra senza .0 se intero
+        max: max.toFixed(1).replace(/\.0$/, ""), // idem
+        avg: avg.toFixed(2).replace(/\.?0+$/, ""), // fino a 2 decimali, senza zeri inutili
         count,
       };
     });
@@ -42,22 +42,29 @@ const SubjectList = ({ grades, subjects }) => {
   subjectStats.sort((a, b) => {
     return (b.avg !== "N/A" ? b.avg : 0) - (a.avg !== "N/A" ? a.avg : 0);
   });
+
   const totalGradesCount = grades.length;
   const totalGradesSum = grades.reduce((sum, grade) => sum + grade.grade, 0);
-  const overallAvg =
-    totalGradesCount > 0
-      ? (totalGradesSum / totalGradesCount).toFixed(2)
-      : "N/A";
+  const rawOverallAvg =
+    totalGradesCount > 0 ? totalGradesSum / totalGradesCount : null;
 
-  const isOverallAvgSufficient = isSufficient(overallAvg);
+  const overallAvg =
+    rawOverallAvg == null || isNaN(rawOverallAvg)
+      ? "N/A"
+      : Number.isInteger(rawOverallAvg)
+      ? rawOverallAvg
+      : rawOverallAvg.toFixed(2).replace(/\.?0+$/, "");
+
+  const isOverallAvgSufficient =
+    overallAvg !== "N/A" && isSufficient(overallAvg);
 
   if (subjects.length === 0) {
     return (
       <div className="component-container no-data-container">
         <h3>Dashboard Voti</h3>
         <p className="no-grades-message">
-          Non hai ancora aggiunto nessuna materia. Usa il pulsante **[+
-          Materia]** nel menu in alto per iniziare!
+          Non hai ancora aggiunto nessuna materia. Usa il pulsante **[+ Materia]**
+          nel menu in alto per iniziare!
         </p>
       </div>
     );
@@ -74,7 +81,7 @@ const SubjectList = ({ grades, subjects }) => {
             isOverallAvgSufficient ? "grade-sufficient" : "grade-insufficient"
           }`}
         >
-          {overallAvg}
+          {overallAvg === "N/A" ? "N/A" : overallAvg}
           <span className="blue">/10</span>
         </p>
       </div>
