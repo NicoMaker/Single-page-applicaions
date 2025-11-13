@@ -5,3 +5,4 @@
 ## Esercizi
 
 - [Ajax](Esercizi/ajax)
+- [Gestione_array](Esercizi/gestione_array)
