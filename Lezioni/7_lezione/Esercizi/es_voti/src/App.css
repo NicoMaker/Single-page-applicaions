@@ -322,6 +322,14 @@ button.action-button:hover {
   text-align: center;
 }
 
-.blue{
+.blue {
   color: darkblue;
+}
+
+.avg-value.grade-sufficient {
+  color: #2ecc71; /* verde */
+}
+
+.avg-value.grade-insufficient {
+  color: #e74c3c; /* rosso */
 }
