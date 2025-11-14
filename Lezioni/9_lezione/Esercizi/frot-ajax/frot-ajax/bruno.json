@@ -1,9 +1,0 @@
-{
-  "version": "1",
-  "name": "frot-ajax",
-  "type": "collection",
-  "ignore": [
-    "node_modules",
-    ".git"
-  ]
-}
