@@ -4,4 +4,4 @@
 
 ## Esercizi
 
-- [frot-ajax][Esercizi/frot-ajax]
+- [frot-ajax](Esercizi/frot-ajax)
