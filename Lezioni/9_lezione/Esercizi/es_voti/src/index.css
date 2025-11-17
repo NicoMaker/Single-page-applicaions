@@ -1,0 +1,10 @@
+/* Global styles imported in main.jsx */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}

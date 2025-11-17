@@ -1,0 +1,502 @@
+/* Modern Theme - Color Palette */
+:root {
+  /* Primary Colors */
+  --color-primary-dark: #1e3a8a;
+  --color-primary-light: #3b82f6;
+  --color-accent: #f97316;
+  --color-accent-light: #fb923c;
+  
+  /* Neutral Colors */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-dark: #cbd5e1;
+  
+  /* Status Colors */
+  --color-sufficient: #16a34a;
+  --color-sufficient-light: #dcfce7;
+  --color-insufficient: #dc2626;
+  --color-insufficient-light: #fee2e2;
+  
+  /* Shadow */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* App Container */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  box-shadow: var(--shadow-md);
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+  color: white;
+  padding: 2rem;
+  border-bottom: none;
+}
+
+.app-header h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.app-header nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.app-header nav a {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  border: 2px solid transparent;
+}
+
+.app-header nav a:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-dashboard {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.nav-add-grade {
+  background-color: rgba(22, 163, 74, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.nav-add-subject {
+  background-color: rgba(249, 115, 22, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Component Container */
+.component-container {
+  border: 1px solid var(--color-border);
+  padding: 1.75rem;
+  margin-top: 1.75rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.component-container:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-dark);
+}
+
+.component-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 1rem;
+  color: var(--color-primary-dark);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+.no-data-container {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+/* Table Styles */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.styled-table thead tr {
+  background-color: var(--color-primary-dark);
+  color: white;
+  text-align: left;
+}
+
+.styled-table th {
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.styled-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.styled-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.styled-table tbody tr:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: var(--color-bg-secondary);
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
+/* Grade Status Colors */
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.grade-insufficient {
+  color: var(--color-insufficient);
+  font-weight: 600;
+}
+
+.grade-sufficient {
+  color: var(--color-sufficient);
+  font-weight: 600;
+}
+
+.bg-insufficient {
+  background-color: var(--color-insufficient-light) !important;
+}
+
+.bg-sufficient {
+  background-color: var(--color-sufficient-light) !important;
+}
+
+.border-insufficient {
+  border-color: var(--color-insufficient) !important;
+  border-width: 2px;
+}
+
+.border-sufficient {
+  border-color: var(--color-sufficient) !important;
+  border-width: 2px;
+}
+
+/* Links and Buttons */
+a.action-link,
+button.action-button {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+a.action-link:hover,
+button.action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.link-detail {
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  color: white;
+}
+
+.link-edit {
+  color: var(--color-accent);
+  background-color: transparent;
+  border: 1.5px solid var(--color-accent);
+}
+
+.link-edit:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.link-back {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.link-back:hover {
+  color: var(--color-primary-light);
+  transform: translateX(-2px);
+}
+
+.btn-delete-subject,
+.btn-delete-grade {
+  background-color: var(--color-insufficient);
+  color: white;
+}
+
+.btn-delete-subject:hover,
+.btn-delete-grade:hover {
+  background-color: #b91c1c;
+}
+
+.btn-delete-grade {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}
+
+/* Form Styles */
+.form-container {
+  border: 2px solid var(--color-border);
+  padding: 1.75rem;
+  margin-top: 1.75rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-bg-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-add-grade {
+  border-color: var(--color-sufficient);
+}
+
+.form-add-subject {
+  border-color: var(--color-accent);
+}
+
+.form-edit-subject {
+  border-color: var(--color-accent);
+}
+
+.form-edit-grade {
+  border-color: var(--color-accent);
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-bg);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input.input-error {
+  border-color: var(--color-insufficient);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.error-text {
+  color: var(--color-insufficient);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+}
+
+.form-container button[type="submit"] {
+  padding: 0.875rem 1.5rem;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.form-container button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-add-grade {
+  background-color: var(--color-sufficient);
+}
+
+.btn-add-grade:hover {
+  background-color: #15803d;
+}
+
+.btn-add-subject {
+  background-color: var(--color-accent);
+}
+
+.btn-add-subject:hover {
+  background-color: #ea580c;
+}
+
+.btn-edit-subject {
+  background-color: var(--color-accent);
+}
+
+.btn-edit-subject:hover {
+  background-color: #ea580c;
+}
+
+.btn-edit-grade {
+  background-color: var(--color-accent);
+}
+
+.btn-edit-grade:hover {
+  background-color: #ea580c;
+}
+
+/* Subject Detail Header */
+.subject-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.25rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.subject-detail-info {
+  flex-grow: 1;
+}
+
+.subject-detail-info p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.subject-detail-info .avg-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.subject-detail-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.no-grades-message {
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: 1.5rem;
+  border-top: 2px dashed var(--color-border);
+  padding-top: 1.5rem;
+  text-align: center;
+  background-color: var(--color-bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px dashed var(--color-border);
+}
+
+/* Overall Average Box */
+.overall-avg-box {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.overall-avg-box:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.avg-label {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.overall-avg-value {
+  font-size: 2.875rem;
+  font-weight: 700;
+  margin: 0.75rem 0 0 0;
+}
+
+.blue {
+  color: var(--color-text-muted);
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+.avg-value.grade-sufficient {
+  color: var(--color-sufficient);
+}
+
+.avg-value.grade-insufficient {
+  color: var(--color-insufficient);
+}
