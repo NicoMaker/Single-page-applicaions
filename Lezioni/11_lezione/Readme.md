@@ -4,4 +4,4 @@
 
 ## Esercizi
 
-- [frot-ajax](Esercizi/frot-ajax)
+- [star wars film](Esercizi/star_wars_film)
