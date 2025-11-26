@@ -7,7 +7,7 @@ import './App.css'; // Puoi aggiungere del CSS base qui
 function App() {
   return (
     <div className="App">
-      <h1>🎬 Star Wars Films (SWAPI)</h1>
+      <h1>🎬 Star Wars Films Database (SWAPI)</h1>
       <FilmList />
     </div>
   );
