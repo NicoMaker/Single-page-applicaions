@@ -5,6 +5,7 @@ import FilmCard from './FilmCard';
 // Rimuovi: import './FilmList.css'; // NON DEVE ESSERCI
 
 const SWAPI_FILMS_URL = 'https://swapi.dev/api/films/';
+const SWAPI_HOME_URL = 'https://swapi.dev/'; // URL della Home di SWAPI
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
@@ -46,14 +47,37 @@ const FilmList = () => {
     // Usa la classe error-message definita in App.css
     return <div className="error-message">**Errore:** {error}</div>;
   }
+  
+  // Aggiungi un componente o un div per mostrare il link alla fonte
+  const sourceLink = (
+    // Usa una classe per stilizzare il link (es. in App.css)
+    <div className="source-link-container">
+      <p>
+        Dati sui film forniti da:{' '}
+        <a 
+          href={SWAPI_HOME_URL} 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          **SWAPI (The Star Wars API)**
+        </a>
+        <br />
+        <br />
+      </p>
+    </div>
+  );
 
   return (
-    // Usa la classe film-list-container definita in App.css
-    <div className="film-list-container">
-      {films.map((film) => (
-        <FilmCard key={film.episode_id} film={film} />
-      ))}
-    </div>
+    <> {/* Fragment per racchiudere elementi multipli */}
+      {sourceLink} {/* Il link appare prima della lista */}
+      
+      {/* Usa la classe film-list-container definita in App.css */}
+      <div className="film-list-container">
+        {films.map((film) => (
+          <FilmCard key={film.episode_id} film={film} />
+        ))}
+      </div>
+    </>
   );
 };
 
