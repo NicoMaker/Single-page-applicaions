@@ -1,0 +1,25 @@
+body {
+  font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.card {
+  border: 4px solid purple;
+  padding: 10px;
+  margin: 5px 10px;
+
+}
+
+
+
+.loading {
+  margin: 20px;
+  text-align: center;
+}
