@@ -1,5 +1,3 @@
-// src/components/FilmList.js
-
 import React, { useState, useEffect } from "react";
 import FilmCard from "./FilmCard";
 // ⬇ Importa il nuovo componente Spinner

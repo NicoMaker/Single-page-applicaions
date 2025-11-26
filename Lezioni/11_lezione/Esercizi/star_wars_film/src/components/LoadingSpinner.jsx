@@ -1,5 +1,3 @@
-// src/components/LoadingSpinner.jsx
-
 import React from 'react';
 
 /**
