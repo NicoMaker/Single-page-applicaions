@@ -5,7 +5,6 @@ import FilmCard from './FilmCard';
 // Rimuovi: import './FilmList.css'; // NON DEVE ESSERCI
 
 const SWAPI_FILMS_URL = 'https://swapi.dev/api/films/';
-const SWAPI_HOME_URL = 'https://swapi.dev/'; // URL della Home di SWAPI
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
@@ -53,9 +52,9 @@ const FilmList = () => {
     // Usa una classe per stilizzare il link (es. in App.css)
     <div className="source-link-container">
       <p>
-        Dati sui film forniti da:{' '}
+        Dati sui film al seguente link:{' '}
         <a 
-          href={SWAPI_HOME_URL} 
+          href={SWAPI_FILMS_URL } 
           target="_blank" 
           rel="noopener noreferrer"
         >
