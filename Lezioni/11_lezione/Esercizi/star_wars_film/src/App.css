@@ -1,42 +1,155 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* src/App.css - Grafica Moderna Completa */
+
+/*
+===================================================
+1. STILI GLOBALI (BODY e HEADINGS)
+===================================================
+*/
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #121212; /* Sfondo molto scuro */
+  color: #e0e0e0; /* Testo chiaro ad alto contrasto */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.App {
   text-align: center;
+  width: 100%;
+  max-width: 1300px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  font-family: 'Inter', sans-serif;
+  color: #00bcd4; /* Ciano moderno come colore primario */
+  font-size: 3.5em;
+  font-weight: 800; /* Extra bold */
+  margin-bottom: 50px;
+  letter-spacing: -0.5px;
+  border-bottom: 2px solid #00bcd4;
+  padding-bottom: 10px;
+  display: inline-block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/*
+===================================================
+2. MESSAGGI DI STATO (Caricamento ed Errore)
+===================================================
+*/
+
+.loading-message {
+  font-size: 1.5em;
+  color: #00bcd4;
+  margin-top: 50px;
 }
 
-.card {
-  padding: 2em;
+.error-message {
+  font-size: 1.4em;
+  color: #ff4d4d;
+  margin-top: 50px;
 }
 
-.read-the-docs {
-  color: #888;
+/*
+===================================================
+3. LAYOUT LISTA (FilmList.js)
+===================================================
+*/
+
+.film-list-container {
+  display: grid;
+  /* Utilizziamo CSS Grid per un layout reattivo e pulito */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 30px; /* Spazio maggiore tra le card */
+  padding: 0;
+  width: 100%;
+}
+
+/*
+===================================================
+4. STILE CARD (FilmCard.js)
+===================================================
+*/
+
+.film-card {
+  /* Struttura */
+  background-color: #1e1e1e; /* Sfondo leggermente più chiaro del body */
+  border-radius: 12px;
+  padding: 30px;
+  color: #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), /* Ombra inferiore (leggera profondità) */
+              0 10px 20px rgba(0, 0, 0, 0.5); /* Ombra diffusa */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #333333; /* Bordo sottile e discreto */
+  text-align: left; /* Allinea il testo a sinistra per leggibilità */
+}
+
+.film-card:hover {
+  transform: translateY(-8px); /* Sollevamento più visibile */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5), 
+              0 15px 30px rgba(0, 0, 0, 0.7),
+              0 0 15px rgba(0, 188, 212, 0.3); /* Leggero bagliore del colore primario */
+}
+
+.film-card-title {
+  color: #00bcd4; /* Ciano moderno */
+  font-weight: 700;
+  font-size: 1.6em;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #282828; /* Separatore discreto */
+}
+
+/* Sottotitolo Episodio */
+.film-card-title span {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: #888;
+    margin-left: 10px;
+}
+
+.film-card-details p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 0.95em;
+}
+
+.film-card-details strong {
+  color: #f0f0f0; /* Testo dell'etichetta più chiaro */
+  min-width: 120px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.film-card-crawl {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: #282828; /* Sfondo per la trama leggermente più chiaro */
+  border-radius: 8px;
+  font-style: italic;
+  font-size: 0.9em;
+  line-height: 1.5;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.film-card-crawl h3 {
+  color: #00bcd4;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.film-card-fallback {
+  color: #ff4d4d;
+  font-size: 1.2em;
+  margin-top: 50px;
 }

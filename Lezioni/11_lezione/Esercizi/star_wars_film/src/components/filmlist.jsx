@@ -2,17 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import FilmCard from './FilmCard';
+// Rimuovi: import './FilmList.css'; // NON DEVE ESSERCI
 
-// URL per recuperare tutti i film dalla SWAPI
 const SWAPI_FILMS_URL = 'https://swapi.dev/api/films/';
-
-// Stili semplici per il contenitore della lista
-const listContainerStyle = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  padding: '20px',
-};
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
@@ -20,6 +12,7 @@ const FilmList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // ... (Logica di fetching identica)
     const fetchFilms = async () => {
       try {
         const response = await fetch(SWAPI_FILMS_URL);
@@ -28,7 +21,6 @@ const FilmList = () => {
         }
         const data = await response.json();
         
-        // Ordina i film per numero di episodio (episode_id) prima di salvarli
         const sortedFilms = data.results.sort((a, b) => a.episode_id - b.episode_id);
         
         setFilms(sortedFilms);
@@ -42,19 +34,21 @@ const FilmList = () => {
     };
 
     fetchFilms();
-  }, []); // L'array vuoto assicura che venga eseguito solo al montaggio del componente
+  }, []);
 
   if (isLoading) {
-    return <div style={{ color: 'white' }}>**Caricamento dei film... 🚀**</div>;
+    // Usa la classe loading-message definita in App.css
+    return <div className="loading-message">**Caricamento dei film... 🚀**</div>;
   }
 
   if (error) {
-    return <div style={{ color: 'red' }}>**Errore:** {error}</div>;
+    // Usa la classe error-message definita in App.css
+    return <div className="error-message">**Errore:** {error}</div>;
   }
 
   return (
-    <div style={listContainerStyle}>
-      {/* Mappa i dati dei film e rende una FilmCard per ciascuno */}
+    // Usa la classe film-list-container definita in App.css
+    <div className="film-list-container">
       {films.map((film) => (
         <FilmCard key={film.episode_id} film={film} />
       ))}
