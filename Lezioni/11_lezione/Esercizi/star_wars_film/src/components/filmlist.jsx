@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import FilmCard from "./FilmCard";
-// ⬇ Importa solo le funzioni e costanti necessarie dal servizio
-import { getFilms, SWAPI_FILMS_URL } from "../services/swapiService";
+// ⬇ Importa il nuovo componente Spinner
+import LoadingSpinner from "./LoadingSpinner"; 
+import { getFilms, SWAPI_FILMS_URL } from "../services/swapiService"; 
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
@@ -13,31 +14,28 @@ const FilmList = () => {
   useEffect(() => {
     const fetchFilms = async () => {
       try {
-        setIsLoading(true);
-        // 🚀 Utilizza la funzione del servizio Axios
-        const sortedFilms = await getFilms();
+        setIsLoading(true); // Assicurati che sia true all'inizio della fetch
+        const sortedFilms = await getFilms(); 
 
         setFilms(sortedFilms);
         setError(null);
       } catch (err) {
-        // Cattura l'errore rilanciato dal servizio
         console.error("Errore nel componente:", err);
-        setError(
-          err.message ||
-            "Si è verificato un errore sconosciuto durante il caricamento."
-        );
+        setError(err.message || "Si è verificato un errore sconosciuto durante il caricamento.");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchFilms();
-  }, []); // L'array di dipendenze vuoto esegue il fetch solo al mount
+  }, []); 
 
+  // 🚀 Utilizzo del componente LoadingSpinner
   if (isLoading)
     return (
-      <div className="loading-message">**Caricamento dei film... 🚀**</div>
+      <LoadingSpinner message="Caricamento dei dati Star Wars..."></LoadingSpinner>
     );
+
   if (error) return <div className="error-message">**Errore:** {error}</div>;
 
   return (
