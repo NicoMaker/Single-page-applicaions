@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "id": "bb66",
+      "firstname": "Mario",
+      "lastname": "Rossi"
+    },
+    {
+      "id": "670d",
+      "firstname": "Gino",
+      "lastname": "Verdi"
+    }
+  ],
+  "posts": [],
+  "banana": [],
+  "todos": [
+    {
+      "id": "35b2",
+      "text": "fare la spesa",
+      "done": false
+    },
+    {
+      "id": "1b7f",
+      "text": "comprare il pane",
+      "done": false
+    },
+    {
+      "id": "4af2",
+      "text": "studiare React",
+      "done": false
+    },
+    {
+      "id": "7308",
+      "text": "prova 11",
+      "done": false
+    },
+    {
+      "id": "b93d",
+      "text": "prova 22",
+      "done": false
+    },
+    {
+      "id": "2f45",
+      "text": "prova 3",
+      "done": false
+    },
+    {
+      "id": "23be",
+      "text": "prova 4",
+      "done": false
+    },
+    {
+      "id": "2d74",
+      "text": "prova 5",
+      "done": false
+    },
+    {
+      "id": "3e47",
+      "text": "prova 6",
+      "done": false
+    },
+    {
+      "id": "95c6",
+      "text": "prova 7",
+      "done": false
+    },
+    {
+      "id": "0a26",
+      "text": "prova 10",
+      "done": false
+    }
+  ]
+}
