@@ -60,8 +60,6 @@ const FilmList = () => {
         >
           **SWAPI (The Star Wars API)**
         </a>
-        <br />
-        <br />
       </p>
     </div>
   );
