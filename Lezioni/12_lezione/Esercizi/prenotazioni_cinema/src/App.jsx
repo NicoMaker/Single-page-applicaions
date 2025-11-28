@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import BookingSidebar from "./components/BookingSidebar.jsx";
 import SeatGrid from "./components/SeatGrid.jsx";
 import Legend from "./components/Legend.jsx";
+import BookingHistory from "./components/BookingHistory.jsx";
 
 // righe A..Z, 7 posti per riga (A1..Z7)
 const ROWS = [
@@ -29,7 +30,8 @@ const times = ["18:00", "21:00", "23:30"];
 
 // mappa: sala|film|orario -> posti occupati
 const initialShowData = {
-  "hall1|inception|21:00": new Set(["A1", "A2", "B5", "C7"]),
+  // Posti A1 e A2 rimossi da qui, ora sono liberi per l'acquisto
+  "hall1|inception|21:00": new Set(["B5", "C7"]), 
   "hall1|oppenheimer|18:00": new Set(["D3", "D4", "E1"]),
   "hall2|dune2|23:30": new Set(["F6", "F7", "G2"]),
   "hall3|inception|18:00": new Set(["A3", "A4", "B1", "B2"]),
@@ -43,6 +45,8 @@ function App() {
   const [selectedTime, setSelectedTime] = useState(times[1]);
   const [showSeatsMap, setShowSeatsMap] = useState(initialShowData);
   const [selectedSeats, setSelectedSeats] = useState(new Set());
+  // Stato per l'elenco delle prenotazioni confermate
+  const [confirmedBookings, setConfirmedBookings] = useState([]);
 
   const selectedHall = halls.find((h) => h.id === selectedHallId);
   const selectedMovie = movies.find((m) => m.id === selectedMovieId);
@@ -71,15 +75,58 @@ function App() {
   const handleConfirm = () => {
     if (selectedSeats.size === 0) return;
 
+    // 1. Aggiorna i posti occupati per lo spettacolo corrente
     const nextShowSeatsMap = { ...showSeatsMap };
     const currentSet = new Set(occupiedSeats);
     selectedSeats.forEach((s) => currentSet.add(s));
     nextShowSeatsMap[showKey] = currentSet;
-
     setShowSeatsMap(nextShowSeatsMap);
+
+    // 2. Aggiungi la prenotazione all'elenco
+    const newBooking = {
+      id: Date.now(), // ID univoco per la prenotazione
+      hallId: selectedHallId,
+      movieId: selectedMovieId,
+      time: selectedTime,
+      seats: Array.from(selectedSeats),
+      totalPrice: totalPrice,
+      hallName: selectedHall.name,
+      movieTitle: selectedMovie.title,
+      showKey: showKey,
+    };
+    setConfirmedBookings((prev) => [...prev, newBooking]);
+
+    // 3. Resetta la selezione
     setSelectedSeats(new Set());
-    alert("Prenotazione confermata!");
+    alert(`Prenotazione confermata per ${newBooking.seats.join(', ')}!`);
   };
+
+  const handleCancelBooking = (bookingId) => {
+    const bookingToCancel = confirmedBookings.find(b => b.id === bookingId);
+    if (!bookingToCancel) return;
+
+    const { showKey: keyToUpdate, seats } = bookingToCancel;
+
+    // 1. Rimuovi i posti occupati dalla mappa
+    const nextShowSeatsMap = { ...showSeatsMap };
+    const currentOccupied = new Set(nextShowSeatsMap[keyToUpdate] || []);
+    
+    seats.forEach(seat => {
+      // Rimuovi il posto per liberarlo
+      if (currentOccupied.has(seat)) {
+        currentOccupied.delete(seat);
+      }
+    });
+
+    nextShowSeatsMap[keyToUpdate] = currentOccupied;
+    setShowSeatsMap(nextShowSeatsMap);
+
+    // 2. Rimuovi la prenotazione dall'elenco
+    setConfirmedBookings(prev => prev.filter(b => b.id !== bookingId));
+
+    alert(`Prenotazione annullata per ${seats.join(', ')}.`);
+  };
+
 
   const handleClearSelection = () => {
     setSelectedSeats(new Set());
@@ -148,6 +195,12 @@ function App() {
             occupiedSeats={occupiedSeats}
             selectedSeats={selectedSeats}
             onSeatClick={handleSeatClick}
+          />
+
+          {/* Nuovo componente per la cronologia delle prenotazioni */}
+          <BookingHistory
+            bookings={confirmedBookings}
+            onCancel={handleCancelBooking}
           />
         </section>
       </main>
