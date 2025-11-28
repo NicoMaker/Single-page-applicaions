@@ -26,11 +26,11 @@ function App() {
 
         <div className="scoreboard">
           <div className="scoreboard-item">
-            <span className="player-label player-x">Giocatore X</span>
+            <span className="player-label player-x">Giocatore X: </span>
             <span className="player-score">{victories.X}</span>
           </div>
           <div className="scoreboard-item">
-            <span className="player-label player-o">Giocatore O</span>
+            <span className="player-label player-o">Giocatore O: </span>
             <span className="player-score">{victories.O}</span>
           </div>
           <button className="btn btn-small" onClick={handleResetVictories}>

@@ -58,18 +58,29 @@ function Board({ onWin }) {
     }
   }, [winner, onWin, hasReportedWin]);
 
-  let status;
+  let statusNode;
   if (winner) {
-    status = `Vince: ${winner}`;
+    statusNode = (
+      <div className="win-banner">
+        <span className="win-label">Vittoria</span>
+        <span className={`win-player win-player-${winner.toLowerCase()}`}>
+          Giocatore {winner}
+        </span>
+      </div>
+    );
   } else if (isDraw) {
-    status = "Pareggio!";
+    statusNode = <div className="status">Pareggio!</div>;
   } else {
-    status = `Tocca a: ${xIsNext ? "X" : "O"}`;
+    statusNode = (
+      <div className="status">
+        Tocca a: <span className="turn-player">{xIsNext ? "X" : "O"}</span>
+      </div>
+    );
   }
 
   return (
     <>
-      <div className="status">{status}</div>
+      {statusNode}
       <div className="board">
         {squares.map((value, index) => (
           <Square

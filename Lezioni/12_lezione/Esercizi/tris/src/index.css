@@ -178,3 +178,67 @@ body {
     0 8px 20px rgba(8, 47, 73, 0.9),
     0 0 0 1px rgba(8, 47, 73, 1);
 }
+
+.win-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at top left,
+    rgba(34, 197, 94, 0.2),
+    rgba(15, 23, 42, 0.96)
+  );
+  box-shadow:
+    0 12px 30px rgba(22, 163, 74, 0.5),
+    0 0 0 1px rgba(34, 197, 94, 0.55);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
+.win-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #bbf7d0;
+  opacity: 0.9;
+}
+
+.win-player {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(120deg, #a7f3d0, #bbf7d0, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 8px rgba(34, 197, 94, 0.7),
+    0 0 22px rgba(22, 163, 74, 0.85);
+}
+
+.win-player-x {
+  background: linear-gradient(120deg, #7dd3fc, #38bdf8, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 8px rgba(56, 189, 248, 0.8),
+    0 0 22px rgba(56, 189, 248, 0.95);
+}
+
+.win-player-o {
+  background: linear-gradient(120deg, #fecaca, #f97373, #fb7185);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 8px rgba(248, 113, 113, 0.8),
+    0 0 22px rgba(248, 113, 113, 0.95);
+}
+
+.turn-player {
+  font-weight: 700;
+  color: #e5e7eb;
+}
