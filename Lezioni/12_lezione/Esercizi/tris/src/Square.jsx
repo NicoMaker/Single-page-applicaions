@@ -15,5 +15,4 @@ function Square({ value, onClick, isWinning }) {
   );
 }
 
-
 export default Square;

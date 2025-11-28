@@ -19,7 +19,6 @@ function calculateWinner(squares) {
       squares[a] === squares[b] &&
       squares[a] === squares[c]
     ) {
-      // ritorno anche la linea vincente
       return { player: squares[a], line: [a, b, c] };
     }
   }
@@ -36,7 +35,7 @@ function Board() {
   const isDraw = !winner && squares.every((sq) => sq !== null);
 
   const handleClick = (index) => {
-    // blocca se casella piena o partita finita
+    // blocca se casella piena o se la partita è già finita
     if (squares[index] || winner) return;
 
     const nextSquares = [...squares];
