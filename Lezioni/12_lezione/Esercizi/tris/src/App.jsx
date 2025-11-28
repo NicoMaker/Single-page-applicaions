@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Board from "./Board.jsx";
+import Board from "./components/Board.jsx";
 import "./App.css";
 import "./index.css";
 
