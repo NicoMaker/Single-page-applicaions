@@ -19,7 +19,8 @@ function calculateWinner(squares) {
       squares[a] === squares[b] &&
       squares[a] === squares[c]
     ) {
-      return squares[a];
+      // ritorno anche la linea vincente
+      return { player: squares[a], line: [a, b, c] };
     }
   }
   return null;
@@ -29,10 +30,13 @@ function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
-  const winner = calculateWinner(squares);
+  const result = calculateWinner(squares);
+  const winner = result?.player || null;
+  const winningLine = result?.line || [];
   const isDraw = !winner && squares.every((sq) => sq !== null);
 
   const handleClick = (index) => {
+    // blocca se casella piena o partita finita
     if (squares[index] || winner) return;
 
     const nextSquares = [...squares];
@@ -55,38 +59,23 @@ function Board() {
     status = `Tocca a: ${xIsNext ? "X" : "O"}`;
   }
 
-  const renderSquare = (i) => (
-    <Square
-      key={i}
-      value={squares[i]}
-      onClick={() => handleClick(i)}
-    />
-  );
-
   return (
-    <div className="board">
+    <>
       <div className="status">{status}</div>
-
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
+      <div className="board">
+        {squares.map((value, index) => (
+          <Square
+            key={index}
+            value={value}
+            onClick={() => handleClick(index)}
+            isWinning={winningLine.includes(index)}
+          />
+        ))}
       </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-
-      <button className="reset-btn" onClick={handleReset}>
-        Reset
+      <button className="btn" onClick={handleReset}>
+        Nuova partita
       </button>
-    </div>
+    </>
   );
 }
 
