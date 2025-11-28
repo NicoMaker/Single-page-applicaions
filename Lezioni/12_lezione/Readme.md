@@ -5,3 +5,4 @@
 ## Esercizi
 
 - [Tris](Esercizi/tris)
+- [Prenotazioni Cinema](Esercizi/prenotazioni_cinema)
