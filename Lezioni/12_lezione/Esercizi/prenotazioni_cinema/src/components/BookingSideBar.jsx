@@ -1,13 +1,16 @@
 import React from "react";
 
 function BookingSidebar({
+  halls,
   movies,
   times,
+  selectedHallId,
   selectedMovieId,
   selectedMovie,
   selectedTime,
   selectedSeats,
   totalPrice,
+  onChangeHall,
   onChangeMovie,
   onChangeTime,
   onClearSelection,
@@ -16,6 +19,20 @@ function BookingSidebar({
   return (
     <>
       <h2>Dettagli prenotazione</h2>
+
+      <div className="field">
+        <label>Sala</label>
+        <select
+          value={selectedHallId}
+          onChange={(e) => onChangeHall(e.target.value)}
+        >
+          {halls.map((h) => (
+            <option key={h.id} value={h.id}>
+              {h.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className="field">
         <label>Film</label>
@@ -51,6 +68,9 @@ function BookingSidebar({
       <div className="summary-card">
         <h3>Riepilogo</h3>
         <p className="summary-movie">{selectedMovie.title}</p>
+        <p className="summary-time">
+          Sala: <strong>{halls.find((h) => h.id === selectedHallId)?.name}</strong>
+        </p>
         <p className="summary-time">Orario: {selectedTime}</p>
         <p className="summary-seats">
           Posti selezionati:{" "}

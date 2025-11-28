@@ -6,6 +6,13 @@ import Legend from "./components/Legend.jsx";
 const ROWS = ["A", "B", "C", "D", "E", "F", "G"];
 const SEATS_PER_ROW = 10;
 
+// più sale
+const halls = [
+  { id: "hall1", name: "Sala 1" },
+  { id: "hall2", name: "Sala 2" },
+  { id: "hall3", name: "Sala 3" },
+];
+
 const movies = [
   { id: "inception", title: "Inception" },
   { id: "oppenheimer", title: "Oppenheimer" },
@@ -14,23 +21,27 @@ const movies = [
 
 const times = ["18:00", "21:00", "23:30"];
 
+// mappa: sala|film|orario -> posti occupati
 const initialShowData = {
-  "inception|21:00": new Set(["A1", "A2", "B5", "C7"]),
-  "oppenheimer|18:00": new Set(["D3", "D4", "E1"]),
-  "dune2|23:30": new Set(["F9", "F10", "G2"]),
+  "hall1|inception|21:00": new Set(["A1", "A2", "B5", "C7"]),
+  "hall1|oppenheimer|18:00": new Set(["D3", "D4", "E1"]),
+  "hall2|dune2|23:30": new Set(["F9", "F10", "G2"]),
+  "hall3|inception|18:00": new Set(["A3", "A4", "B1", "B2"]),
 };
 
 const ticketPrice = 8.5;
 
 function App() {
+  const [selectedHallId, setSelectedHallId] = useState(halls[0].id);
   const [selectedMovieId, setSelectedMovieId] = useState(movies[0].id);
   const [selectedTime, setSelectedTime] = useState(times[1]);
   const [showSeatsMap, setShowSeatsMap] = useState(initialShowData);
   const [selectedSeats, setSelectedSeats] = useState(new Set());
 
+  const selectedHall = halls.find((h) => h.id === selectedHallId);
   const selectedMovie = movies.find((m) => m.id === selectedMovieId);
 
-  const showKey = `${selectedMovieId}|${selectedTime}`;
+  const showKey = `${selectedHallId}|${selectedMovieId}|${selectedTime}`;
   const occupiedSeats = showSeatsMap[showKey] ?? new Set();
 
   const totalSeats = ROWS.length * SEATS_PER_ROW;
@@ -45,7 +56,6 @@ function App() {
 
   const handleSeatClick = (seatId) => {
     if (occupiedSeats.has(seatId)) return;
-
     const next = new Set(selectedSeats);
     if (next.has(seatId)) next.delete(seatId);
     else next.add(seatId);
@@ -69,6 +79,11 @@ function App() {
     setSelectedSeats(new Set());
   };
 
+  const handleChangeHall = (newHallId) => {
+    setSelectedHallId(newHallId);
+    setSelectedSeats(new Set());
+  };
+
   const handleChangeMovie = (newMovieId) => {
     setSelectedMovieId(newMovieId);
     setSelectedSeats(new Set());
@@ -87,20 +102,23 @@ function App() {
           <span className="brand-name">CineBooking</span>
         </div>
         <div className="header-right">
-          <span className="badge">Sala 1</span>
+          <span className="badge">{selectedHall.name}</span>
         </div>
       </header>
 
       <main className="app-main">
         <section className="panel panel-left">
           <BookingSidebar
+            halls={halls}
             movies={movies}
             times={times}
+            selectedHallId={selectedHallId}
             selectedMovieId={selectedMovieId}
             selectedMovie={selectedMovie}
             selectedTime={selectedTime}
             selectedSeats={selectedSeats}
             totalPrice={totalPrice}
+            onChangeHall={handleChangeHall}
             onChangeMovie={handleChangeMovie}
             onChangeTime={handleChangeTime}
             onClearSelection={handleClearSelection}
