@@ -4,4 +4,4 @@
 
 ## Esercizi
 
--[Tris](Esercizi/Tris)
+- [Tris](Esercizi/Tris)
