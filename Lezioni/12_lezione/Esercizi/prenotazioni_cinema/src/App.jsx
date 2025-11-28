@@ -3,7 +3,13 @@ import BookingSidebar from "./components/BookingSidebar.jsx";
 import SeatGrid from "./components/SeatGrid.jsx";
 import Legend from "./components/Legend.jsx";
 
-const ROWS = ["A", "B", "C", "D", "E", "F", "G"];
+// righe A..Z, 7 posti per riga (A1..Z7)
+const ROWS = [
+  "A","B","C","D","E","F","G",
+  "H","I","J","K","L","M","N",
+  "O","P","Q","R","S","T","U",
+  "V","W","X","Y","Z"
+];
 const SEATS_PER_ROW = 10;
 
 // più sale
@@ -25,7 +31,7 @@ const times = ["18:00", "21:00", "23:30"];
 const initialShowData = {
   "hall1|inception|21:00": new Set(["A1", "A2", "B5", "C7"]),
   "hall1|oppenheimer|18:00": new Set(["D3", "D4", "E1"]),
-  "hall2|dune2|23:30": new Set(["F9", "F10", "G2"]),
+  "hall2|dune2|23:30": new Set(["F6", "F7", "G2"]),
   "hall3|inception|18:00": new Set(["A3", "A4", "B1", "B2"]),
 };
 
