@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Square from "./Square.jsx";
 
 function calculateWinner(squares) {
@@ -25,9 +25,10 @@ function calculateWinner(squares) {
   return null;
 }
 
-function Board() {
+function Board({ onWin }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [hasReportedWin, setHasReportedWin] = useState(false);
 
   const result = calculateWinner(squares);
   const winner = result?.player || null;
@@ -35,11 +36,11 @@ function Board() {
   const isDraw = !winner && squares.every((sq) => sq !== null);
 
   const handleClick = (index) => {
-    // blocca se casella piena o se la partita è già finita
     if (squares[index] || winner) return;
 
     const nextSquares = [...squares];
     nextSquares[index] = xIsNext ? "X" : "O";
+
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
   };
@@ -47,7 +48,15 @@ function Board() {
   const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+    setHasReportedWin(false);
   };
+
+  useEffect(() => {
+    if (winner && onWin && !hasReportedWin) {
+      onWin(winner);
+      setHasReportedWin(true);
+    }
+  }, [winner, onWin, hasReportedWin]);
 
   let status;
   if (winner) {
