@@ -38,7 +38,8 @@ function contaLettera(arr, lettera) {
   return conta;
 }
 
-console.log("La 'a' compare:", contaLettera(lettere, "a"), "volte");
+const lettraDaContare = "a";
+console.log(`La '${lettraDaContare} compare:, ${contaLettera(lettere, lettraDaContare)}, volte`);
 
 // 4) Sconto 15%
 let prezzi = [9.99, 6.5, 12.2, 22.4, 32.9, 14.6, 31.5];
