@@ -3,3 +3,5 @@
 # 13 lezione 03 Dicembre 2025
 
 ## Esercizi
+
+- [esercizi_base](Esercizi/esercizi_base/)
