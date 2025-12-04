@@ -30,11 +30,6 @@ const times = ["18:00", "21:00", "23:30"];
 
 // mappa: sala|film|orario -> posti occupati
 const initialShowData = {
-  // Posti A1 e A2 rimossi da qui, ora sono liberi per l'acquisto
-  "hall1|inception|21:00": new Set(["B5", "C7"]), 
-  "hall1|oppenheimer|18:00": new Set(["D3", "D4", "E1"]),
-  "hall2|dune2|23:30": new Set(["F6", "F7", "G2"]),
-  "hall3|inception|18:00": new Set(["A3", "A4", "B1", "B2"]),
 };
 
 const ticketPrice = 8.5;
