@@ -1,0 +1,140 @@
+/* --- Stili Globali per UI/UX --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+/* --- Calculator Container --- */
+.calculator {
+  width: 340px; 
+  background-color: #282c34; 
+  border-radius: 15px; /* Bordi più arrotondati */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px #3a3f45; /* Ombra profonda */
+  overflow: hidden;
+  margin: 20px auto; 
+}
+
+/* --- Display --- */
+.calculator-display {
+  background-color: #1c191c;
+  color: #ffffff;
+  height: 100px; /* Altezza maggiore */
+  text-align: right;
+  padding: 20px;
+  font-size: 4em; /* Font più grande */
+  font-weight: 300; /* Leggermente più sottile */
+  overflow-x: auto; /* Permette lo scrolling orizzontale se il numero è troppo lungo */
+  white-space: nowrap;
+}
+
+/* --- Tastierino (Keys) --- */
+.calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 8px; /* Spazio maggiore tra i tasti */
+  padding: 15px;
+}
+
+/* --- Bottoni Base --- */
+.calculator-button {
+  height: 65px; /* Altezza maggiore */
+  border: none;
+  border-radius: 35px; /* Tasti completamente arrotondati (pill-shaped) */
+  font-size: 1.8em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+/* Feedback al click */
+.calculator-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Tasti Numerici e Punto --- */
+.number {
+  background-color: #a0a0a0; /* Grigio chiaro */
+  color: #1c191c;
+}
+
+.number:hover {
+  background-color: #b0b0b0;
+}
+
+/* --- Tasti Funzione (C) --- */
+.function {
+  background-color: #6a6a6a; /* Grigio medio */
+  color: white;
+}
+
+.function:hover {
+  background-color: #7a7a7a;
+}
+
+/* --- Tasti Operatori (+, -, *, /, =) --- */
+.operator {
+  background-color: #ff9500; /* Arancione vivo */
+  color: white;
+  font-weight: bold;
+}
+
+.operator:hover {
+  background-color: #ffa520;
+}
+
+/* --- Layout Grid Spanning --- */
+
+/* Tasto C (Clear) */
+.large {
+  grid-column: span 3;
+  text-align: left;
+  padding-left: 28%; /* Centratura visiva */
+  border-radius: 35px; /* Mantiene la forma a pillola lunga */
+}
+
+/* Tasto 0 */
+.zero {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: 15%; /* Centratura visiva */
+  border-radius: 35px;
+}
+
+/* Tasto Uguale (=) */
+.large-equal {
+  grid-row: span 2;
+  height: auto; /* Permette l'estensione verticale */
+}
+
+/* --- Responsive Design (Media Query) --- */
+@media (max-width: 400px) {
+  .calculator {
+    width: 95vw; /* Occupa quasi tutta la larghezza dello schermo su mobile */
+    max-width: 320px;
+    margin: 10px auto;
+  }
+  
+  .calculator-display {
+    font-size: 3.5em; /* Rimpicciolisce un po' il font su schermi piccoli */
+    height: 90px;
+  }
+  
+  .calculator-button {
+    height: 60px;
+    font-size: 1.6em;
+  }
+}
