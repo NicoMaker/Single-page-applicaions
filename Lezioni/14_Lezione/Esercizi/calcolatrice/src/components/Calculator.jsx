@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Display from './Display';
 import Keypad from './Keypad';
 
-// Funzione helper di calcolo sicuro (senza eval)
 const calculate = (num1, num2, operator) => {
   const n1 = parseFloat(num1);
   const n2 = parseFloat(num2);
@@ -23,13 +22,11 @@ const calculate = (num1, num2, operator) => {
 };
 
 const Calculator = () => {
-  // --- STATO ---
   const [displayValue, setDisplayValue] = useState('0');
   const [firstOperand, setFirstOperand] = useState(null);
   const [operator, setOperator] = useState(null);
   const [waitingForSecondOperand, setWaitingForSecondOperand] = useState(false);
 
-  // --- HANDLERS DI BASE ---
   const clearCalculator = () => {
     setDisplayValue('0');
     setFirstOperand(null);
@@ -59,7 +56,6 @@ const Calculator = () => {
     }
   };
 
-  // --- GESTIONE OPERATORI (+, -, *, /) ---
   const handleOperator = (nextOperator) => {
     if (displayValue === 'Error') return;
     const inputValue = displayValue;
@@ -80,7 +76,6 @@ const Calculator = () => {
     setOperator(nextOperator);
   };
 
-  // --- ESECUZIONE CALCOLO (=) ---
   const executeCalculation = () => {
     if (displayValue === 'Error' || firstOperand === null || operator === null || waitingForSecondOperand) {
       return;
@@ -92,7 +87,6 @@ const Calculator = () => {
     setWaitingForSecondOperand(true);
   };
 
-  // --- NUOVA GESTIONE OPERAZIONI SPECIALI (±, %) ---
   const performSpecialOperation = (op) => {
       const inputValue = parseFloat(displayValue);
 
@@ -103,7 +97,6 @@ const Calculator = () => {
               setDisplayValue(String(inputValue * -1));
               break;
           case '%':
-              // La percentuale agisce come (current value / 100)
               const percentValue = inputValue / 100;
               setDisplayValue(String(percentValue));
               setWaitingForSecondOperand(false); 
@@ -113,14 +106,14 @@ const Calculator = () => {
       }
   };
 
-  // Oggetto contenente tutti gli handler da passare al Keypad
+
   const keypadHandlers = {
       inputDigit,
       inputDot,
       handleOperator,
       executeCalculation,
       clearCalculator,
-      performSpecialOperation, // Nuovo handler
+      performSpecialOperation,
   };
 
   return (
