@@ -4,4 +4,4 @@
 
 ## Esercizi
 
-- [Calcolatrice](Esercizi/Calcolatrice)
+- [Calcolatrice](Esercizi/calcolatrice)
