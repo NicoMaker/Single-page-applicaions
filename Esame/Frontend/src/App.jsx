@@ -39,7 +39,6 @@ function App() {
       const dishesData = await dishesRes.json()
       const tablesData = await tablesRes.json()
 
-      // Carico i dettagli completi per ogni ordine
       const ordersWithDetails = await Promise.all(
         ordersData.map(async (order) => {
           const detailRes = await fetch(`${API_URL}/orders/${order.id}`, { mode: "cors" })
