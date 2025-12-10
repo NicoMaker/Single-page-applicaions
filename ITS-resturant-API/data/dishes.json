@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "nome": "Spaghetti alla Carbonara",
+    "categoria": "Primo",
+    "prezzo": 12.50,
+    "descrizione": "Spaghetti con guanciale croccante, pecorino romano e crema d'uovo.",
+    "vegetariano": false
+  },
+  {
+    "id": 2,
+    "nome": "Margherita",
+    "categoria": "Pizza",
+    "prezzo": 8.00,
+    "descrizione": "Pomodoro, mozzarella fior di latte e basilico fresco.",
+    "vegetariano": true
+  },
+  {
+    "id": 3,
+    "nome": "Lasagne al Ragù",
+    "categoria": "Primo",
+    "prezzo": 11.00,
+    "descrizione": "Pasta fresca al forno con ragù alla bolognese, besciamella e parmigiano.",
+    "vegetariano": false
+  },
+  {
+    "id": 4,
+    "nome": "Risotto ai Funghi Porcini",
+    "categoria": "Primo",
+    "prezzo": 13.00,
+    "descrizione": "Riso carnaroli mantecato con porcini freschi e parmigiano.",
+    "vegetariano": true
+  },
+  {
+    "id": 5,
+    "nome": "Tagliata di Manzo",
+    "categoria": "Secondo",
+    "prezzo": 18.00,
+    "descrizione": "Controfiletto di manzo con rucola, scaglie di grana e riduzione al balsamico.",
+    "vegetariano": false
+  },
+  {
+    "id": 6,
+    "nome": "Pollo alla Griglia",
+    "categoria": "Secondo",
+    "prezzo": 14.00,
+    "descrizione": "Petto di pollo marinato e grigliato con contorno di verdure.",
+    "vegetariano": false
+  },
+  {
+    "id": 7,
+    "nome": "Insalata Mediterranea",
+    "categoria": "Contorno",
+    "prezzo": 7.00,
+    "descrizione": "Pomodori, olive, feta, cetrioli e cipolla rossa.",
+    "vegetariano": true
+  },
+  {
+    "id": 8,
+    "nome": "Tiramisu",
+    "categoria": "Dessert",
+    "prezzo": 6.00,
+    "descrizione": "Dolce al cucchiaio con savoiardi, mascarpone e cacao.",
+    "vegetariano": true
+  },
+  {
+    "id": 9,
+    "nome": "Panna Cotta ai Frutti di Bosco",
+    "categoria": "Dessert",
+    "prezzo": 5.50,
+    "descrizione": "Panna cotta con coulis di frutti di bosco.",
+    "vegetariano": true
+  },
+  {
+    "id": 10,
+    "nome": "Bruschette Miste",
+    "categoria": "Antipasto",
+    "prezzo": 6.50,
+    "descrizione": "Selezione di bruschette con pomodoro, olive e crema di carciofi.",
+    "vegetariano": true
+  }
+]
