@@ -67,8 +67,6 @@ function App() {
       setLoading(false)
     }
   }
-
-  // --- FUNZIONI DI UTILITÀ ---
   const calculateTotal = (orderDishes) => {
     if (!orderDishes || orderDishes.length === 0) {
       return 0
