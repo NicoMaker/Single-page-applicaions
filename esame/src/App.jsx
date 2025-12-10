@@ -23,9 +23,9 @@ function App() {
   const loadData = async () => {
     try {
       const [ordersRes, dishesRes, tablesRes] = await Promise.all([
-        fetch(`${API_URL}/orders`),
-        fetch(`${API_URL}/dishes`),
-        fetch(`${API_URL}/tables`),
+        fetch(`${API_URL}/orders`, { mode: "cors" }),
+        fetch(`${API_URL}/dishes`, { mode: "cors" }),
+        fetch(`${API_URL}/tables`, { mode: "cors" }),
       ])
 
       if (!ordersRes.ok || !dishesRes.ok || !tablesRes.ok) {
@@ -42,7 +42,7 @@ function App() {
       // Carico i dettagli completi per ogni ordine
       const ordersWithDetails = await Promise.all(
         ordersData.map(async (order) => {
-          const detailRes = await fetch(`${API_URL}/orders/${order.id}`)
+          const detailRes = await fetch(`${API_URL}/orders/${order.id}`, { mode: "cors" })
           return await detailRes.json()
         }),
       )
@@ -83,12 +83,13 @@ function App() {
         mode: "cors",
       })
 
-      // Il backend restituisce 204 No Content, non c'è JSON da parsare
       if (response.status === 204 || response.ok) {
         console.log("[v0] Ordine eliminato con successo")
         await loadData()
       } else {
-        throw new Error(`Errore ${response.status}`)
+        const errorText = await response.text()
+        console.error("[v0] Errore dal server:", errorText)
+        throw new Error(`Errore ${response.status}: ${errorText}`)
       }
     } catch (error) {
       console.error("[v0] Errore eliminazione ordine:", error)
@@ -116,36 +117,54 @@ function App() {
       })
 
       if (!response.ok) {
-        throw new Error(`Errore ${response.status}`)
+        const errorText = await response.text()
+        console.error("[v0] Errore dal server:", errorText)
+        throw new Error(`Errore ${response.status}: ${errorText}`)
       }
 
+      console.log("[v0] Ordine creato con successo")
       setShowNewOrder(false)
       setNewOrder({ tableId: "", dishes: [] })
       await loadData()
     } catch (error) {
       console.error("[v0] Errore creazione ordine:", error)
-      alert("Errore durante la creazione dell'ordine")
+      alert("Errore durante la creazione dell'ordine: " + error.message)
     }
   }
 
   const updateOrder = async (orderId, updatedDishes) => {
     try {
+      console.log("[v0] Aggiornamento ordine:", orderId)
+      console.log("[v0] Nuovi piatti:", updatedDishes)
+
+      const payload = { dishes: updatedDishes }
+      console.log("[v0] Payload inviato:", JSON.stringify(payload))
+
       const response = await fetch(`${API_URL}/orders/${orderId}`, {
         method: "PUT",
         mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dishes: updatedDishes }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       })
 
+      console.log("[v0] Response status:", response.status)
+
       if (!response.ok) {
-        throw new Error(`Errore ${response.status}`)
+        const errorText = await response.text()
+        console.error("[v0] Errore dal server:", errorText)
+        throw new Error(`Errore ${response.status}: ${errorText}`)
       }
+
+      const result = await response.json()
+      console.log("[v0] Ordine aggiornato:", result)
 
       setSelectedOrder(null)
       await loadData()
     } catch (error) {
       console.error("[v0] Errore aggiornamento ordine:", error)
-      alert("Errore durante l'aggiornamento dell'ordine")
+      alert("Errore durante l'aggiornamento dell'ordine: " + error.message)
     }
   }
 
