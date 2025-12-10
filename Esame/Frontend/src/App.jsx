@@ -230,7 +230,7 @@ function App() {
               return (
                 <div key={order.id} className="order-card">
                   <div className="order-header">
-                    <h3>Tavolo {getTableName(order.tableId)}</h3>
+                    <h3>{getTableName(order.tableId)}</h3>
                     <span className="order-id">#{order.id.slice(0, 8).toUpperCase()}</span>
                   </div>
 
