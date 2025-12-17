@@ -15,7 +15,6 @@
 - [11 Lezione](Lezioni/11_lezione/Readme.md)
 - [12 Lezione](Lezioni/12_lezione/Readme.md)
 - [13 Lezione](Lezioni/13_Lezione/Readme.md)
-- [14 Lezione](Lezioni/14_Lezione/Readme.md)
 
 
 
