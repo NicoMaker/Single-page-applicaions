@@ -18,6 +18,7 @@
 - [14 Lezione](Lezioni/14_Lezione/Readme.md)
 
 
+
 ## Pre Esame 05 Dicembre 2025
 
 - [Pre Esame](Pre-esame) 
