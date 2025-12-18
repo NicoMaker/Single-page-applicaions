@@ -17,7 +17,6 @@
 - [13 Lezione](Lezioni/13_Lezione/Readme.md)
 
 
-
 ## Pre Esame 05 Dicembre 2025
 
 - [Pre Esame](Pre-esame) 
